@@ -1,0 +1,22 @@
+form:
+  label:
+    parent: 'Parent'
+    code: 'Kode'
+    name: 'Nama'
+  select:
+    empty: '---PILIHAN---'
+  button:
+    submit: 'Simpan'
+
+action:
+  view: 'Tampilkan'
+  edit: 'Ubah'
+  delete: 'Hapus'
+  reject: 'Batal'
+  add: 'Tambah'
+  back: 'Kembali'
+message:
+  not_found: 'data tidak ditemukan'
+  save: 'data berhasil disimpan'
+  update: 'data berhasil diperbaharui'
+  delete: 'data berhasil dihapus'

@@ -1,0 +1,57 @@
+<aside id="left-panel">
+<nav>
+<ul>
+    <li class="active">
+        <a href="{{ path('home_dashboard') }}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-lg fa-fw fa-database"></i> <span class="menu-item-parent">Master</span></a>
+        <ul>
+            <li>
+                <a href="{{ path('indikator_index') }}">Indikator</a>
+            </li>
+            <li>
+                <a href="#">Propinsi</a>
+            </li>
+            <li>
+                <a href="#">Kabupaten</a>
+            </li>
+            <li>
+                <a href="#">Kecamatan</a>
+            </li>
+            <li>
+                <a href="#">Kelurahan</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="{{ path('indikator_dashboard') }}"><i class="fa fa-lg fa-fw fa-pencil-square-o"></i> <span class="menu-item-parent">Indikator</span></a>
+    </li>
+    <li>
+        <a href="{{ path('query_dashboard') }}"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">Query</span></a>
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-lg fa-fw fa-desktop"></i> <span class="menu-item-parent">Utilitas</span></a>
+        <ul>
+            <li>
+                <a href="#">User</a>
+            </li>
+            <li>
+                <a href="#">Hak Akses</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-lg fa-fw fa-gear"></i> <span class="menu-item-parent">Tool</span></a>
+        <ul>
+            <li>
+                <a href="#">Import Data</a>
+            </li>
+            <li>
+                <a href="#">Export Data</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+</nav>
+</aside>

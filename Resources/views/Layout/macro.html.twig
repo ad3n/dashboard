@@ -1,0 +1,35 @@
+{% macro field_render(field, readonly) %}
+    {% if readonly is defined %}
+        {% set disabled = readonly %}
+    {% endif %}
+
+    {% set attr = field.vars.attr %}
+    {% if attr.class is not defined %}
+        {% set class = 'form-control' %}
+    {% endif %}
+
+    {% if attr.title is defined %}
+        {% set class = class ~ ' _tooltip' %}
+    {% endif %}
+
+    {% set form_css = 'form-group' %}
+    {% if field.vars.errors | length %}
+        {% set form_css = form_css ~ ' has-error' %}
+    {% endif %}
+
+    {% if disabled is sameas(true) %}
+        {% set attr = { 'class': class, 'readonly': disabled } %}
+    {% else %}
+        {% set attr = { 'class': class } %}
+    {% endif %}
+
+    {% if field.vars.errors | length %}
+        {{ form_label(field, '<i class="fa fa-times-circle-o"></i> ' ~ field.vars.label | trans) }}
+    {% else %}
+        {{ form_label(field)}}
+    {% endif %}
+<label class="select">
+    {{ form_errors(field) }}
+    {{ form_widget(field, { 'attr': attr }) }}
+</label>
+{% endmacro %}

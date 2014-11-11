@@ -1,0 +1,85 @@
+{% extends 'AppBundle:Layout:main.html.twig' %}
+
+{% block content %}
+<div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+    <header>
+        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+        <h2>Indikator</h2>
+    </header>
+    <div>
+        <div class="jarviswidget-editbox">
+        </div>
+        <div class="widget-body no-padding">
+            <form class="smart-form" action="{{ path('report_dashboard') }}" method="post">
+                {% include 'AppBundle:Demo:filter.html.twig' with {'propinsi': propinsi}%}
+                {% include 'AppBundle:Demo:periode.html.twig' %}
+                {% include 'AppBundle:Demo:list_indikator.html.twig' %}
+                <footer>
+                    <button type="submit" class="btn btn-primary">{{ type | capitalize }}</button>
+                </footer>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#propinsi').on('change', function() {
+        jQuery.ajax({
+            url: '/api/wilayah/kabupaten/' + jQuery(this).val() + '/child',
+            type: 'get',
+            success: function (response) {
+                response = JSON.parse(response);
+                var html = '';
+                for (var i =0; i < response.length; i++) {
+                    html = html + '<option value="'+ response[i].code_kabupaten +'">'+ response[i].name +'</option>';
+                }
+
+                jQuery('#kabupaten').html(html);
+                jQuery('#kabupaten').trigger('change');
+            }
+        });
+    });
+
+    jQuery('#kabupaten').on('change', function() {
+        jQuery.ajax({
+            url: '/api/wilayah/kecamatan/' + jQuery(this).val() + '/child',
+            type: 'get',
+            success: function (response) {
+                response = JSON.parse(response);
+                var html = '';
+                for (var i =0; i < response.length; i++) {
+                    html = html + '<option value="'+ response[i].code_kecamatan +'">'+ response[i].name +'</option>';
+                }
+
+                jQuery('#kecamatan').html(html);
+                jQuery('#kecamatan').trigger('change');
+            }
+        });
+    });
+
+    jQuery('#kecamatan').on('change', function() {
+        jQuery.ajax({
+            url: '/api/wilayah/kelurahan/' + jQuery(this).val() + '/child',
+            type: 'get',
+            success: function (response) {
+                response = JSON.parse(response);
+                var html = '';
+                for (var i =0; i < response.length; i++) {
+                    html = html + '<option value="'+ response[i].code_kelurahan +'">'+ response[i].name +'</option>';
+                }
+
+                jQuery('#kelurahan').html(html);
+                jQuery('#kelurahan').trigger('change');
+            }
+        });
+    });
+
+    jQuery('.tree').jaofiletree({
+        script  : '{{ path('api_indikator_tree') }}',
+        showroot: 'Pilih Indikator',
+        method  : 'get',
+        onclick : function(elem,type,file){}
+    });
+});
+</script>
+{% endblock %}

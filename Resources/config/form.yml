@@ -1,0 +1,4 @@
+services:
+  app.form.indikator:
+    class: AppBundle\Form\IndikatorType
+    arguments: [@males.guesser]

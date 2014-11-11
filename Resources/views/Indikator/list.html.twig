@@ -1,0 +1,95 @@
+{% extends 'AppBundle:Layout:main.html.twig' %}
+{% trans_default_domain 'AppBundle' %}
+{% set path = path('indikator_create') %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('message.save') %}
+        <div class="alert alert-success alert-dismissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('message.update') %}
+        <div class="alert alert-success alert-dismissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('message.delete') %}
+        <div class="alert alert-danger alert-dismissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+    <div class="jarviswidget jarviswidget-sortable">
+        <header role="heading">
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>LIST INDIKATOR</h2>
+            <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+        </header>
+        <div role="content">
+            <div class="jarviswidget-editbox">
+            </div>
+            <div class="widget-body no-padding">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <td>No</td>
+                                <td>Parent</td>
+                                <td>Kode</td>
+                                <td>Nama</td>
+                                <td>Pilihan</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for key, record in data %}
+                            <tr>
+                                <td>{{ start + key + 1 }}</td>
+                                <td>{{ record.parent }}</td>
+                                <td>{{ record.code }}</td>
+                                <td>{{ record.name }}</td>
+                                <td>
+                                    <a href = "{{ path('indikator_show', {'id': record.id}) }}" class="btn btn-labeled btn-success">
+                                        <span class="btn-label"><i class="glyphicon glyphicon-share"></i></span>
+                                        {{ 'action.view' | trans }}
+                                    </a>
+                                    <a href = "{{ path('indikator_edit', {'id' : record.id}) }}" class="btn btn-labeled btn-warning">
+                                        <span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>
+                                        {{ 'action.edit' | trans }}
+                                    </a>
+                                    <a href = "{{ path('indikator_delete', {'id': record.id}) }}" class="delete btn btn-labeled btn-danger">
+                                        <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
+                                        {{ 'action.delete' | trans }}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="pull-left margin-bottom-10">
+                <a href = "{{ path('indikator_create') }}" class="btn btn-primary margin-right-5">
+                    {{ 'action.add' | trans }}
+                </a>
+            </div>
+            <div class="pull-right margin-bottom-10">
+                {{ knp_pagination_render(data) }}
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock %}

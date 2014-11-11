@@ -1,0 +1,34 @@
+<header id="header">
+    <div id="logo-group">
+        <span id="logo"><img class="logo" src="/img/logo_jkn.png" alt="Jaminan Kesehatan Nasional"></span>
+    </div>
+    <div class="pull-right">
+        <div id="hide-menu" class="btn-header pull-right">
+            <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+        </div>
+        <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
+            <li class="">
+                <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
+                    <img src="/img/avatars/sunny.png" alt="Yan Kusyanto" class="online" />
+                    <span style="margin-left: 7px"><b>{{ app.user.fullName }}</b></span>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <a href="{{ path('fos_user_profile_show') }}" class="padding-10 padding-top-0 padding-bottom-0"> <i class="fa fa-user"></i> Profil</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('fos_user_change_password') }}" class="padding-10 padding-top-0 padding-bottom-0"><i class="fa fa-cog"></i> Ubah Password</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}" data-action="userLogout" class="padding-10 padding-top-5 padding-bottom-5"><i class="fa fa-sign-out fa-lg"></i> <strong>Logout</strong></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div id="logout" class="btn-header transparent pull-right">
+            <span> <a href="{{ path('fos_user_security_logout') }}" title="Log Out" data-action="userLogout" data-logout-msg="Apakah Anda yakin akan keluar?"><i class="fa fa-sign-out"></i></a> </span>
+        </div>
+    </div>
+</header>

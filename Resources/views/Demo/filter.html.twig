@@ -1,0 +1,46 @@
+<header><b>Filter</b></header>
+<fieldset>
+    <div class="row">
+        <section class="col col-6">
+            <label class="label">Propinsi</label>
+            <label class="select">
+                <select id="propinsi">
+                    <option value="">---PILIH PROPINSI---</option>
+                    {% for key, value in propinsi %}
+                        <option value="{{ value.codePropinsi }}">{{ value.name }}</option>
+                    {% endfor %}
+                </select>
+                <i></i>
+            </label>
+        </section>
+        <section class="col col-6">
+            <label class="label">Kabupaten</label>
+            <label class="select">
+                <select id="kabupaten">
+                    <option value="">---PILIH KABUPATEN---</option>
+                </select>
+                <i></i>
+            </label>
+        </section>
+    </div>
+    <div class="row">
+        <section class="col col-6">
+            <label class="label">Kecamatan</label>
+            <label class="select">
+                <select id="kecamatan">
+                    <option value="">---PILIH KECAMATAN---</option>
+                </select>
+                <i></i>
+            </label>
+        </section>
+        <section class="col col-6">
+            <label class="label">Kelurahan</label>
+            <label class="select">
+                <select id="kelurahan">
+                    <option value="">---PILIH KELURAHAN---</option>
+                </select>
+                <i></i>
+            </label>
+        </section>
+    </div>
+</fieldset>
