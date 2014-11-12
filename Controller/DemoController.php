@@ -8,21 +8,12 @@
  **/
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-/**
- * @Route("/demo")
- *
- * Class DemoController
- * @package AppBundle\Controller
- **/
 class DemoController extends Controller
 {
     /**
-     * @Route("/dashboard", name="home_dashboard")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
      **/
     public function dashboardAction()
@@ -31,7 +22,6 @@ class DemoController extends Controller
     }
 
     /**
-     * @Route("/indikator", name="indikator_dashboard")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
      **/
     public function indikatorAction()
@@ -40,7 +30,6 @@ class DemoController extends Controller
     }
 
     /**
-     * @Route("/query", name="query_dashboard")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
      **/
     public function queryAction()
@@ -49,8 +38,6 @@ class DemoController extends Controller
     }
 
     /**
-     * @Route("/report", name="report_dashboard")
-     * @Method("POST")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
      **/
     public function reportAction()

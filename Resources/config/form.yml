@@ -2,3 +2,7 @@ services:
   app.form.indikator:
     class: AppBundle\Form\IndikatorType
     arguments: [@males.guesser]
+
+  app.form.indikator_filter:
+    class: AppBundle\Form\IndikatorFilterType
+    arguments: [@males.guesser]

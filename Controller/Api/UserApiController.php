@@ -32,7 +32,7 @@ class UserApiController extends ApiController
      **/
     public function find($id)
     {
-        $entityAlias = $this->container->get('app.util.bundle_guesser')->inizialize($this)->getEntityAlias();
+        $entityAlias = $this->container->get('males.guesser')->initialize($this)->getEntityAlias();
         $em = $this->getDoctrine();
         $entity = $em->getRepository($entityAlias)->find($id);
 

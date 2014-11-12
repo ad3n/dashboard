@@ -15,8 +15,12 @@ action:
   reject: 'Batal'
   add: 'Tambah'
   back: 'Kembali'
+  search: 'Pencarian Cepat'
+  filter: 'Pencarian Lanjutan'
+
 message:
   not_found: 'data tidak ditemukan'
   save: 'data berhasil disimpan'
   update: 'data berhasil diperbaharui'
   delete: 'data berhasil dihapus'
+  filter: 'Masukkan Kata Kunci'

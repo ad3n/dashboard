@@ -11,7 +11,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serialize;
-use Ihsan\MalesBundle\Entity\EntityInterface;
+use Ihsan\MalesBundle\Entity\AbstractEntity;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\IndikatorRepository")
@@ -19,7 +19,7 @@ use Ihsan\MalesBundle\Entity\EntityInterface;
  *
  * @Serialize\ExclusionPolicy("all")
  **/
-class Indikator implements EntityInterface
+class Indikator extends AbstractEntity
 {
     /**
      * @ORM\Id
