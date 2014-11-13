@@ -13,6 +13,7 @@ action:
   edit: 'Ubah'
   delete: 'Hapus'
   reject: 'Batal'
+  filter_reset: 'Reset Filter'
   add: 'Tambah'
   back: 'Kembali'
   search: 'Pencarian Cepat'

@@ -40,21 +40,22 @@
                 <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
             </header>
             <div class="clearfix">
-                <div class="pull-left margin-bottom-10">
-                    <div class="col-lg-6">
-                        <form role="form">
-                            <div class="input-group">
-                                <input type="text" name="filter" class="form-control" placeholder="{{ 'message.filter' | trans }}">
-                                <input type="hidden" name="mode" value="basic">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-success" type="submit">{{ 'action.search' | trans }}</button>
-                                    <a href = "{{ path('indikator_filter') }}" class="btn btn-primary">
-                                        {{ 'action.filter' | trans }}
-                                    </a>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
+                <div class="col-lg-6 pull-left margin-bottom-10">
+                    <form role="form">
+                        <div class="input-group">
+                            <input type="text" name="filter" class="form-control" placeholder="{{ 'message.filter' | trans }}">
+                            <input type="hidden" name="mode" value="basic">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" type="submit">{{ 'action.search' | trans }}</button>
+                                <a href = "{{ path('indikator_filter') }}" class="btn btn-primary">
+                                    {{ 'action.filter' | trans }}
+                                </a>
+                                <a href = "{{ path('indikator_index') }}" class="btn btn-warning">
+                                    {{ 'action.filter_reset' | trans }}
+                                </a>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div role="content">
