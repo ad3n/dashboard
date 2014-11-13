@@ -78,7 +78,7 @@
                                     <td>{{ start + key + 1 }}</td>
                                     <td>{{ record.parent }}</td>
                                     <td>{{ record.code }}</td>
-                                    <td>{{ record.name }}</td>
+                                    <td>{{ record.name | bold_keyword(filter, mode) | raw }}</td>
                                     <td>
                                         <a href = "{{ path('indikator_show', {'id': record.id}) }}" class="btn btn-labeled btn-success">
                                             <span class="btn-label"><i class="glyphicon glyphicon-share"></i></span>
