@@ -2,22 +2,30 @@ services:
   app.security.encoder.generator:
     class: AppBundle\Security\Encoder\BaseGenerator
     lazy: true
+
   app.security.encoder.password:
     class: AppBundle\Security\Encoder\PasswordEncoder
     lazy: true
     arguments:
       - @app.security.encoder.generator
+
   app.util.serializer:
     class: AppBundle\Util\Serializer
     lazy: true
     arguments:
       - @jms_serializer
+
   app.event.listener.ajax_exception_listener:
     class: AppBundle\Event\Listener\XmlHttpRequestEventListener
     lazy: true
     arguments: [@app.util.serializer]
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+  app.twig.filter.to_string:
+    class: AppBundle\Twig\ArrayToStringFilter
+    tags:
+      - { name: twig.extension }
 
 imports:
   - { resource: form.yml }

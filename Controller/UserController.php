@@ -18,9 +18,9 @@ use Ihsan\MalesBundle\Entity\EntityInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/admin/indikator", service="app.controller.indikator")
+ * @Route("/admin/user", service="app.controller.user")
  **/
-class IndikatorController extends CrudController
+class UserController extends CrudController
 {
     public function __construct(ContainerInterface $container, AbstractType $formType, EntityInterface $entity)
     {
@@ -28,7 +28,7 @@ class IndikatorController extends CrudController
     }
 
     /**
-     * @Route("/new/", name="indikator_create")
+     * @Route("/new/", name="user_create")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -41,7 +41,7 @@ class IndikatorController extends CrudController
     }
 
     /**
-     * @Route("/", name="indikator_index")
+     * @Route("/", name="user_index")
      * @Method({"GET"})
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -54,7 +54,7 @@ class IndikatorController extends CrudController
     }
 
     /**
-     * @Route("/{id}/edit", name="indikator_edit")
+     * @Route("/{id}/edit", name="user_edit")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -67,7 +67,7 @@ class IndikatorController extends CrudController
     }
 
     /**
-     * @Route("/{id}/delete", name="indikator_delete")
+     * @Route("/{id}/delete", name="user_delete")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -80,7 +80,7 @@ class IndikatorController extends CrudController
     }
 
     /**
-     * @Route("/{id}/show", name="indikator_show")
+     * @Route("/{id}/show", name="user_show")
      * @Method({"GET"})
      * @Security("has_role('ROLE_ADMIN')")
      *

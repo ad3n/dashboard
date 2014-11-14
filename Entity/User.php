@@ -10,12 +10,13 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Ihsan\MalesBundle\Entity\EntityInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
  **/
-class User extends BaseUser
+class User extends BaseUser implements EntityInterface
 {
     /**
      * @ORM\Id
@@ -66,5 +67,25 @@ class User extends BaseUser
     public function getAuthenticationToken()
     {
         return $this->authenticationToken;
+    }
+
+    public function getName()
+    {
+        return $this->fullName;
+    }
+
+    public function getFilter()
+    {
+        return 'username';
+    }
+
+    public function getProperties()
+    {
+        return get_object_vars($this);
+    }
+
+    public function __toString()
+    {
+        return $this->fullName;
     }
 }

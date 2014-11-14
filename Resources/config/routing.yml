@@ -8,11 +8,6 @@ home_dashboard:
     methods:  [GET]
     defaults: { _controller: AppBundle:Demo:dashboard }
 
-indikator_dashboard:
-    path:     /admin/demo/indikator/
-    methods:  [GET]
-    defaults: { _controller: AppBundle:Demo:indikator }
-
 query_dashboard:
     path:     /admin/demo/query/
     methods:  [GET]
@@ -22,33 +17,3 @@ report_dashboard:
     path:     /admin/demo/report/
     methods:  [POST]
     defaults: { _controller: AppBundle:Demo:report }
-
-indikator_create:
-    path:     /admin/indikator/new/
-    methods:  [GET, POST]
-    defaults: { _controller: app.controller.indikator:newAction }
-
-indikator_index:
-    path:     /admin/indikator/
-    methods:  [GET]
-    defaults: { _controller: app.controller.indikator:indexAction }
-
-indikator_filter:
-    path:     /admin/indikator/filter
-    methods:  [GET]
-    defaults: { _controller: app.controller.indikator:filterAction }
-
-indikator_edit:
-    path:     /admin/indikator/{id}/edit/
-    methods:  [GET, POST]
-    defaults: { _controller: app.controller.indikator:editAction }
-
-indikator_delete:
-    path:     /admin/indikator/{id}/delete/
-    methods:  [GET, POST]
-    defaults: { _controller: app.controller.indikator:deleteAction }
-
-indikator_show:
-    path:     /admin/indikator/{id}/show/
-    methods:  [GET, POST]
-    defaults: { _controller: app.controller.indikator:showAction }

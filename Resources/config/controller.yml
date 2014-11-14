@@ -2,3 +2,7 @@ services:
   app.controller.indikator:
     class: AppBundle\Controller\IndikatorController
     arguments: [@service_container, @app.form.indikator, @app.entity.indikator]
+
+  app.controller.user:
+    class: AppBundle\Controller\UserController
+    arguments: [@service_container, @app.form.user, @app.entity.user]

@@ -2,3 +2,6 @@ services:
   app.form.indikator:
     class: AppBundle\Form\IndikatorType
     arguments: [@males.guesser]
+  app.form.user:
+     class: AppBundle\Form\UserType
+     arguments: [@males.guesser, %security.role_hierarchy.roles%]
