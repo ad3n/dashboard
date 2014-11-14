@@ -1,4 +1,4 @@
 services:
   app.controller.indikator:
     class: AppBundle\Controller\IndikatorController
-    arguments: [@service_container, @app.form.indikator, @app.form.indikator_filter, @app.entity.indikator]
+    arguments: [@service_container, @app.form.indikator, @app.entity.indikator]

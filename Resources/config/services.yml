@@ -17,7 +17,7 @@ services:
     lazy: true
     arguments: [@app.util.serializer]
     tags:
-        - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
 imports:
   - { resource: form.yml }

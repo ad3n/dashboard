@@ -41,7 +41,7 @@ class Indikator extends AbstractEntity
      *
      * @Serialize\Expose
      **/
-    private $parent;
+    protected $parent;
 
     /**
      * @ORM\Column(name="code", type="string", length=4)
