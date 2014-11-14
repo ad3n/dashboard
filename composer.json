@@ -1,0 +1,26 @@
+{
+    "name": "ihsanudin/dashboard-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony Dashboard Bundle",
+    "keywords": ["Dashboard"],
+    "homepage": "http://github.com/ihsanudin/dashboard",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Muhammad Surya Ihsanuddin",
+            "email": "surya.kejawen@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/symfony": "~2.3"
+    },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "*",
+        "symfony/yaml": "~2.3"
+    },
+    "autoload": {
+        "psr-4": { "AppBundle\\": "" }
+    }
+}
