@@ -49,7 +49,7 @@ class Indikator extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
-     * @Assert\Range(min="2", minMessage="form.error.min", max="4", maxMessage="form.error.max")
+     * @Assert\Length(min="2", minMessage="form.error.min", max="4", maxMessage="form.error.max")
      **/
     protected $code;
 
@@ -58,7 +58,7 @@ class Indikator extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
-     * @Assert\Range(min="3", minMessage="form.error.min", max="255", maxMessage="form.error.max")
+     * @Assert\Length(min="3", minMessage="form.error.min", max="255", maxMessage="form.error.max")
      **/
     protected $name;
 

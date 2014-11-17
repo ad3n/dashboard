@@ -8,17 +8,23 @@
  **/
 namespace AppBundle\Form\DataTransformer;
 
+use AppBundle\Entity\Wilayah;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class WilayahToCodeTransformer implements DataTransformerInterface
 {
-    public function transform($array)
+    public function transform($code)
     {
-        return $array[0];
+        return $code;
     }
 
-    public function reverseTransform($role)
+    public function reverseTransform($wilayah)
     {
-        return array($role);
+        if (! $wilayah instanceof Wilayah) {
+            throw new TransformationFailedException('The value must be instance of AppBundle\\Entity\\Wilayah');
+        }
+
+        return $wilayah->getCodePropinsi();
     }
 }

@@ -35,7 +35,7 @@ class Wilayah extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
-     * @Assert\Range(min="1", max="2")
+     * @Assert\Length(min="2", minMessage="form.error.min", max="2", maxMessage="form.error.max")
      **/
     protected $codePropinsi;
 
@@ -44,7 +44,7 @@ class Wilayah extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
-     * @Assert\Range(min="1", minMessage="form.error.min", max="2", maxMessage="form.error.max")
+     * @Assert\Length(min="2", minMessage="form.error.min", max="2", maxMessage="form.error.max")
      **/
     protected $codeKabupaten;
 
@@ -53,7 +53,7 @@ class Wilayah extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
-     * @Assert\Range(min="1", minMessage="form.error.min", max="2", maxMessage="form.error.max")
+     * @Assert\Length(min="2", minMessage="form.error.min", max="2", maxMessage="form.error.max")
      **/
     protected $codeKecamatan;
 
@@ -62,7 +62,7 @@ class Wilayah extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
-     * @Assert\Range(min="1", minMessage="form.error.min", max="2", maxMessage="form.error.max")
+     * @Assert\Length(min="2", minMessage="form.error.min", max="2", maxMessage="form.error.max")
      **/
     protected $codeKelurahan;
 
@@ -71,7 +71,7 @@ class Wilayah extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
-     * @Assert\Range(min="3", minMessage="form.error.min", max="33", maxMessage="form.error.max")
+     * @Assert\Length(min="3", minMessage="form.error.min", max="33", maxMessage="form.error.max")
      **/
     protected $name;
 

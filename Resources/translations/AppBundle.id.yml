@@ -12,6 +12,10 @@ form:
     empty: '---PILIHAN---'
   button:
     submit: 'Simpan'
+  error:
+    min: 'Jumlah karakter terlalu pendek'
+    max: 'Jumlah karakter terlalu panjang'
+    not_equal: 'Nilai tidak diijinkan, ganti dengan nilai yang lain.'
 
 action:
   view: 'Tampilkan'

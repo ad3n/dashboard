@@ -8,11 +8,12 @@
  **/
 namespace AppBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Ihsan\MalesBundle\Form\AbstractType;
 use Ihsan\MalesBundle\Guesser\BundleGuesserInterface;
-use Doctrine\ORM\EntityRepository;
+use AppBundle\Form\DataTransformer\WilayahToCodeTransformer;
 
 class KabupatenType extends AbstractType
 {
@@ -25,20 +26,24 @@ class KabupatenType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $transformer = new WilayahToCodeTransformer();
         $builder
-            ->add('code_propinsi', 'entity', array(
-                'label' => 'form.label.code',
-                'class' => $this->guesser->getEntityClass(),
-                'empty_value' => 'form.select.empty',
-                'property' => 'name',
-                'query_builder' => function(EntityRepository $er ) {
-                    return $er->createQueryBuilder('a')
-                        ->andWhere('a.codePropinsi <> 0')
-                        ->andWhere('a.codeKabupaten = 0')
-                        ->andWhere('a.codeKecamatan = 0')
-                        ->andWhere('a.codeKelurahan = 0');
-                }
-            ))
+            ->add($builder->create(
+                'code_propinsi', 'entity', array(
+                    'label' => 'form.label.code',
+                    'class' => $this->guesser->getEntityClass(),
+                    'empty_value' => 'form.select.empty',
+                    'property' => 'name',
+                    'query_builder' => function(EntityRepository $er ) {
+                        return $er->createQueryBuilder('a')
+                            ->andWhere('a.codePropinsi <> 0')
+                            ->andWhere('a.codeKabupaten = 0')
+                            ->andWhere('a.codeKecamatan = 0')
+                            ->andWhere('a.codeKelurahan = 0');
+                        }
+                    )
+                )->addModelTransformer($transformer)
+            )
             ->add('code_kabupaten', 'text', array(
                 'label' => 'form.label.code',
             ))

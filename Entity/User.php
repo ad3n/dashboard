@@ -30,7 +30,7 @@ class User extends BaseUser implements EntityInterface
      * @ORM\Column(name="full_name", type="string", length=77, nullable=true)
      *
      * @Assert\NotBlank
-     * @Assert\Range(min="3", minMessage="form.error.min", max="77", maxMessage="form.error.max")
+     * @Assert\Length(min="3", minMessage="form.error.min", max="77", maxMessage="form.error.max")
      **/
     protected $fullName;
 
