@@ -2,13 +2,13 @@
 {% block content %}
 <div style="width: 30%; margin: auto">
     <div class="well no-padding">
-        <form action="{{ path('fos_user_security_login') }}" id="login-form" class="smart-form client-form" novalidate="novalidate">
+        <form action="{{ path('fos_user_security_check') }}" id="login-form" class="smart-form client-form" novalidate="novalidate" method="post">
             <header>JKN Executive Dashboard</header>
             <fieldset>
                 <section>
                     <label class="label">Username</label>
                     <label class="input"> <i class="icon-append fa fa-user"></i>
-                        <input type="email" name="_username">
+                        <input type="text" name="_username">
                     </label>
                 </section>
                 <section>
@@ -19,9 +19,10 @@
                 </section>
                 <section>
                     <label class="checkbox">
-                        <input type="checkbox" name="remember" checked="">
+                        <input type="checkbox" name="_remember_me" checked="">
                         <i></i>Selalu ingat saya</label>
                 </section>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
             </fieldset>
             <footer>
                 <button type="submit" class="btn btn-primary">Login</button>
