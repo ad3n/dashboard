@@ -12,10 +12,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Ihsan\MalesBundle\Controller\CrudController;
 use Ihsan\MalesBundle\Form\AbstractType;
 use Ihsan\MalesBundle\Entity\EntityInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/admin/user", service="app.controller.user")
@@ -45,12 +45,12 @@ class UserController extends CrudController
      * @Method({"GET"})
      * @Security("has_role('ROLE_ADMIN')")
      *
-     * @param Request $request
+     * @param bool $toUpperFilter
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction($toUpperFilter = false)
     {
-        return parent::indexAction($request);
+        return parent::indexAction($toUpperFilter);
     }
 
     /**

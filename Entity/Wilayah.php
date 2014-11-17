@@ -8,8 +8,10 @@
  **/
 namespace AppBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serialize;
+use Ihsan\MalesBundle\Entity\AbstractEntity;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\WilayahRepository")
@@ -17,7 +19,7 @@ use JMS\Serializer\Annotation as Serialize;
  *
  * @Serialize\ExclusionPolicy("all")
  **/
-class Wilayah
+class Wilayah extends AbstractEntity
 {
     /**
      * @ORM\Id
@@ -32,6 +34,8 @@ class Wilayah
      * @ORM\Column(name="code_propinsi", type="string", length=2)
      *
      * @Serialize\Expose
+     * @Assert\NotBlank
+     * @Assert\Range(min="1", max="2")
      **/
     protected $codePropinsi;
 
@@ -39,6 +43,8 @@ class Wilayah
      * @ORM\Column(name="code_kabupaten", type="string", length=2)
      *
      * @Serialize\Expose
+     * @Assert\NotBlank
+     * @Assert\Range(min="1", minMessage="form.error.min", max="2", maxMessage="form.error.max")
      **/
     protected $codeKabupaten;
 
@@ -46,6 +52,8 @@ class Wilayah
      * @ORM\Column(name="code_kecamatan", type="string", length=2)
      *
      * @Serialize\Expose
+     * @Assert\NotBlank
+     * @Assert\Range(min="1", minMessage="form.error.min", max="2", maxMessage="form.error.max")
      **/
     protected $codeKecamatan;
 
@@ -53,6 +61,8 @@ class Wilayah
      * @ORM\Column(name="code_kelurahan", type="string", length=4)
      *
      * @Serialize\Expose
+     * @Assert\NotBlank
+     * @Assert\Range(min="1", minMessage="form.error.min", max="2", maxMessage="form.error.max")
      **/
     protected $codeKelurahan;
 
@@ -60,8 +70,17 @@ class Wilayah
      * @ORM\Column(name="name", type="string", length=33)
      *
      * @Serialize\Expose
+     * @Assert\NotBlank
+     * @Assert\Range(min="3", minMessage="form.error.min", max="33", maxMessage="form.error.max")
      **/
     protected $name;
+
+    public function __construct()
+    {
+        $this->codeKabupaten = 0;
+        $this->codeKecamatan = 0;
+        $this->codeKelurahan = 0;
+    }
 
     public function getId()
     {
@@ -70,7 +89,7 @@ class Wilayah
 
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = strtoupper($name);
 
         return $this;
     }

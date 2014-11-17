@@ -8,7 +8,6 @@
  **/
 namespace AppBundle\Twig;
 
-
 class ArrayToStringFilter extends \Twig_Extension
 {
     public function getFilters()

@@ -2,6 +2,15 @@ services:
   app.form.indikator:
     class: AppBundle\Form\IndikatorType
     arguments: [@males.guesser]
+
   app.form.user:
      class: AppBundle\Form\UserType
      arguments: [@males.guesser, %security.role_hierarchy.roles%]
+
+  app.form.propinsi:
+     class: AppBundle\Form\PropinsiType
+     arguments: [@males.guesser]
+
+  app.form.kabupaten:
+     class: AppBundle\Form\KabupatenType
+     arguments: [@males.guesser]

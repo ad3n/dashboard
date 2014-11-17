@@ -8,6 +8,7 @@
  **/
 namespace AppBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Ihsan\MalesBundle\Entity\EntityInterface;
@@ -27,6 +28,9 @@ class User extends BaseUser implements EntityInterface
 
     /**
      * @ORM\Column(name="full_name", type="string", length=77, nullable=true)
+     *
+     * @Assert\NotBlank
+     * @Assert\Range(min="3", minMessage="form.error.min", max="77", maxMessage="form.error.max")
      **/
     protected $fullName;
 
@@ -47,7 +51,7 @@ class User extends BaseUser implements EntityInterface
 
     public function setFullName($fullName)
     {
-        $this->fullName = $fullName;
+        $this->fullName = strtoupper($fullName);
 
         return $this;
     }

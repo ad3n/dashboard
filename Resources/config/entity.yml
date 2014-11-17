@@ -1,5 +1,9 @@
 services:
   app.entity.indikator:
     class: AppBundle\Entity\Indikator
+
   app.entity.user:
     class: AppBundle\Entity\User
+
+  app.entity.wilayah:
+    class: AppBundle\Entity\Wilayah

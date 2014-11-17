@@ -16,19 +16,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Ihsan\MalesBundle\Controller\CrudController;
 use Ihsan\MalesBundle\Form\AbstractType;
 use Ihsan\MalesBundle\Entity\EntityInterface;
+use Ihsan\MalesBundle\IhsanMalesBundle as Constant;
 
 /**
- * @Route("/admin/indikator", service="app.controller.indikator")
+ * @Route("/admin/propinsi", service="app.controller.propinsi")
  **/
-class IndikatorController extends CrudController
+class PropinsiController extends CrudController
 {
     public function __construct(ContainerInterface $container, AbstractType $formType, EntityInterface $entity)
     {
-        parent::__construct($container, $formType, $entity);
+        parent::__construct($container, $formType, $entity, 'AppBundle\Entity\Wilayah');
     }
 
     /**
-     * @Route("/new/", name="indikator_create")
+     * @Route("/new/", name="propinsi_create")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -41,7 +42,7 @@ class IndikatorController extends CrudController
     }
 
     /**
-     * @Route("/", name="indikator_index")
+     * @Route("/", name="propinsi_index")
      * @Method({"GET"})
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -50,11 +51,47 @@ class IndikatorController extends CrudController
      */
     public function indexAction($toUpperFilter = true)
     {
-        return parent::indexAction($toUpperFilter);
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository($this->guesser->getEntityAlias());
+        $request = $this->container->get('request');
+
+        /**
+         * @var QueryBuilder
+         **/
+        $qb = $repo->createQueryBuilder('o')
+            ->select('o')
+            ->andWhere('o.codePropinsi <> 0')
+            ->andWhere('o.codeKabupaten = 0')
+            ->andWhere('o.codeKecamatan = 0')
+            ->andWhere('o.codeKelurahan = 0')
+            ->addOrderBy('o.codePropinsi', 'DESC');
+        $filter = $toUpperFilter ? strtoupper($request->query->get('filter')) : $request->query->get('filter');
+
+        if ($filter) {
+            $qb->andWhere(sprintf('o.%s LIKE :filter', $this->entity->getFilter()))
+                ->setParameter('filter', strtr('%filter%', array('filter' => $filter)));
+        }
+
+        $page = $request->query->get('page', 1);
+        $paginator  = $this->container->get('knp_paginator');
+
+        $pagination = $paginator->paginate(
+            $qb,
+            $page,
+            Constant::RECORD_PER_PAGE
+        );
+
+        return $this->render(sprintf('%s:%s:list.html.twig', $this->guesser->getBundleAlias(), $this->guesser->getIdentity()),
+            array(
+                'data' => $pagination,
+                'start' => ($page - 1) * Constant::RECORD_PER_PAGE,
+                'filter' => $filter,
+            )
+        );
     }
 
     /**
-     * @Route("/{id}/edit", name="indikator_edit")
+     * @Route("/{id}/edit", name="propinsi_edit")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -67,7 +104,7 @@ class IndikatorController extends CrudController
     }
 
     /**
-     * @Route("/{id}/delete", name="indikator_delete")
+     * @Route("/{id}/delete", name="propinsi_delete")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -80,7 +117,7 @@ class IndikatorController extends CrudController
     }
 
     /**
-     * @Route("/{id}/show", name="indikator_show")
+     * @Route("/{id}/show", name="propinsi_show")
      * @Method({"GET"})
      * @Security("has_role('ROLE_ADMIN')")
      *

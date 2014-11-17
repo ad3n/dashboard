@@ -8,7 +8,7 @@
                 <div class="jarviswidget jarviswidget-sortable">
                     <header role="heading">
                         <span class="widget-icon"> <i class="fa fa-crosshairs"></i> </span>
-                        <h2>DETAIL USER</h2>
+                        <h2>DETAIL KABUPATEN</h2>
                         <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
                     </header>
                     <div role="content">
@@ -18,23 +18,13 @@
                             <div class="smart-form">
                                 <fieldset>
                                     <div class="row">
-                                        <section class="col col-6">
-                                            <label class="label">{{ 'form.label.full_name' | trans }}</label>
-                                            <label class="input">{{ data.fullName }}</label>
+                                        <section class="col col-4">
+                                            <label class="label">{{ 'form.label.code' | trans }}</label>
+                                            <label class="input">{{ data.codeKabupaten }}</label>
                                         </section>
                                         <section class="col col-6">
-                                            <label class="label">{{ 'form.label.email' | trans }}</label>
-                                            <label class="input">{{ data.email }}</label>
-                                        </section>
-                                    </div>
-                                    <div class="row">
-                                        <section class="col col-6">
-                                            <label class="label">{{ 'form.label.username' | trans }}</label>
-                                            <label class="input">{{ data.username }}</label>
-                                        </section>
-                                        <section class="col col-6">
-                                            <label class="label">{{ 'form.label.role' | trans }}</label>
-                                            <label class="input">{{ data.roles | to_string }}</label>
+                                            <label class="label">{{ 'form.label.name' | trans }}</label>
+                                            <label class="input">{{ data.name }}</label>
                                         </section>
                                     </div>
                                 </fieldset>

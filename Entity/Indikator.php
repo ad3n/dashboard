@@ -8,6 +8,7 @@
  **/
 namespace AppBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serialize;
@@ -47,6 +48,8 @@ class Indikator extends AbstractEntity
      * @ORM\Column(name="code", type="string", length=4)
      *
      * @Serialize\Expose
+     * @Assert\NotBlank
+     * @Assert\Range(min="2", minMessage="form.error.min", max="4", maxMessage="form.error.max")
      **/
     protected $code;
 
@@ -54,6 +57,8 @@ class Indikator extends AbstractEntity
      * @ORM\Column(name="name", type="string", length=255)
      *
      * @Serialize\Expose
+     * @Assert\NotBlank
+     * @Assert\Range(min="3", minMessage="form.error.min", max="255", maxMessage="form.error.max")
      **/
     protected $name;
 

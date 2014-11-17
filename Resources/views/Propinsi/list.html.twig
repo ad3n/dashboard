@@ -1,6 +1,6 @@
 {% extends 'AppBundle:Layout:main.html.twig' %}
 {% trans_default_domain 'AppBundle' %}
-{% set path = path('user_create') %}
+{% set path = path('propinsi_create') %}
 
 {% block content %}
     <section id="widget-grid" class="">
@@ -36,7 +36,7 @@
                 <div class="jarviswidget jarviswidget-sortable">
                     <header role="heading">
                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                        <h2>LIST USER</h2>
+                        <h2>LIST PROPINSI</h2>
                         <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
                     </header>
                     <div class="clearfix">
@@ -47,7 +47,7 @@
                                     <input type="hidden" name="mode" value="basic">
                             <span class="input-group-btn">
                                 <button class="btn btn-success" type="submit">{{ 'action.search' | trans }}</button>
-                                <a href = "{{ path('user_index') }}" class="btn btn-warning">
+                                <a href = "{{ path('propinsi_index') }}" class="btn btn-warning">
                                     {{ 'action.filter_reset' | trans }}
                                 </a>
                             </span>
@@ -64,10 +64,8 @@
                                     <thead>
                                     <tr>
                                         <td>No</td>
-                                        <td>Username</td>
-                                        <td>Nama Lengkap</td>
-                                        <td>Email</td>
-                                        <td>Hak Akses</td>
+                                        <td>Kode</td>
+                                        <td>Nama</td>
                                         <td>Pilihan</td>
                                     </tr>
                                     </thead>
@@ -75,20 +73,18 @@
                                     {% for key, record in data %}
                                         <tr>
                                             <td>{{ start + key + 1 }}</td>
-                                            <td>{{ record.username | bold_keyword(filter) | raw }}</td>
-                                            <td>{{ record.fullName }}</td>
-                                            <td>{{ record.email }}</td>
-                                            <td>{{ record.roles | to_string }}</td>
+                                            <td>{{ record.codePropinsi }}</td>
+                                            <td>{{ record.name | bold_keyword(filter) | raw }}</td>
                                             <td>
-                                                <a href = "{{ path('user_show', {'id': record.id}) }}" class="btn btn-labeled btn-success">
+                                                <a href = "{{ path('propinsi_show', {'id': record.id}) }}" class="btn btn-labeled btn-success">
                                                     <span class="btn-label"><i class="glyphicon glyphicon-share"></i></span>
                                                     {{ 'action.view' | trans }}
                                                 </a>
-                                                <a href = "{{ path('user_edit', {'id' : record.id}) }}" class="btn btn-labeled btn-warning">
+                                                <a href = "{{ path('propinsi_edit', {'id' : record.id}) }}" class="btn btn-labeled btn-warning">
                                                     <span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>
                                                     {{ 'action.edit' | trans }}
                                                 </a>
-                                                <a href = "{{ path('user_delete', {'id': record.id}) }}" class="delete btn btn-labeled btn-danger">
+                                                <a href = "{{ path('propinsi_delete', {'id': record.id}) }}" class="delete btn btn-labeled btn-danger">
                                                     <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
                                                     {{ 'action.delete' | trans }}
                                                 </a>
@@ -102,7 +98,7 @@
                     </div>
                     <div class="clearfix">
                         <div class="pull-left margin-bottom-10">
-                            <a href = "{{ path('user_create') }}" class="btn btn-primary">
+                            <a href = "{{ path('propinsi_create') }}" class="btn btn-primary">
                                 {{ 'action.add' | trans }}
                             </a>
                         </div>

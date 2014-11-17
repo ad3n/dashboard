@@ -16,8 +16,10 @@ class WilayahRepository extends EntityRepository
     public function findAllPropinsi()
     {
         $qb = $this->createQueryBuilder('a')
-            ->andWhere('a.codePropinsi IS NOT NULL')
+            ->andWhere('a.codePropinsi <> 0')
             ->andWhere('a.codeKabupaten = 0')
+            ->andWhere('a.codeKecamatan = 0')
+            ->andWhere('a.codeKelurahan = 0')
             ->getQuery()
             ->getResult()
         ;
