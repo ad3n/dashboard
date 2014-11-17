@@ -1,6 +1,6 @@
 {% extends 'AppBundle:Layout:main.html.twig' %}
 {% trans_default_domain 'AppBundle' %}
-{% set path = path('indikator_create') %}
+{% set path = path('user_create') %}
 
 {% block content %}
     <section id="widget-grid" class="">
@@ -47,7 +47,7 @@
                                     <input type="hidden" name="mode" value="basic">
                             <span class="input-group-btn">
                                 <button class="btn btn-success" type="submit">{{ 'action.search' | trans }}</button>
-                                <a href = "{{ path('indikator_index') }}" class="btn btn-warning">
+                                <a href = "{{ path('user_index') }}" class="btn btn-warning">
                                     {{ 'action.filter_reset' | trans }}
                                 </a>
                             </span>
@@ -80,15 +80,15 @@
                                             <td>{{ record.email }}</td>
                                             <td>{{ record.roles | to_string }}</td>
                                             <td>
-                                                <a href = "{{ path('indikator_show', {'id': record.id}) }}" class="btn btn-labeled btn-success">
+                                                <a href = "{{ path('user_show', {'id': record.id}) }}" class="btn btn-labeled btn-success">
                                                     <span class="btn-label"><i class="glyphicon glyphicon-share"></i></span>
                                                     {{ 'action.view' | trans }}
                                                 </a>
-                                                <a href = "{{ path('indikator_edit', {'id' : record.id}) }}" class="btn btn-labeled btn-warning">
+                                                <a href = "{{ path('user_edit', {'id' : record.id}) }}" class="btn btn-labeled btn-warning">
                                                     <span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>
                                                     {{ 'action.edit' | trans }}
                                                 </a>
-                                                <a href = "{{ path('indikator_delete', {'id': record.id}) }}" class="delete btn btn-labeled btn-danger">
+                                                <a href = "{{ path('user_delete', {'id': record.id}) }}" class="delete btn btn-labeled btn-danger">
                                                     <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>
                                                     {{ 'action.delete' | trans }}
                                                 </a>
@@ -102,7 +102,7 @@
                     </div>
                     <div class="clearfix">
                         <div class="pull-left margin-bottom-10">
-                            <a href = "{{ path('indikator_create') }}" class="btn btn-primary">
+                            <a href = "{{ path('user_create') }}" class="btn btn-primary">
                                 {{ 'action.add' | trans }}
                             </a>
                         </div>

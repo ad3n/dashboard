@@ -24,16 +24,13 @@ class IndikatorType extends AbstractType
                 'property' => 'name',
                 'empty_value' => 'form.select.empty',
                 'label' => 'form.label.parent',
-                'attr' => array('title' => 'form.tooltip.parent'),
                 'required' => false,
             ))
             ->add('code', 'text', array(
                 'label' => 'form.label.code',
-                'attr' => array('title' => 'form.tooltip.code'),
             ))
             ->add('name', 'text', array(
                 'label' => 'form.label.name',
-                'attr' => array('title' => 'form.tooltip.name'),
             ))
         ;
     }

@@ -3,6 +3,11 @@ form:
     parent: 'Parent'
     code: 'Kode'
     name: 'Nama'
+    full_name: 'Nama Lengkap'
+    username: 'Username'
+    password: 'Kata Sandi'
+    email: 'Email'
+    role: 'Hak Akses'
   select:
     empty: '---PILIHAN---'
   button:

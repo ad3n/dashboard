@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 use Ihsan\MalesBundle\Form\AbstractType;
 use Ihsan\MalesBundle\Guesser\BundleGuesserInterface;
+use AppBundle\Form\DataTransformer\RoleToArrayTransformer;
 
 class UserType extends AbstractType
 {
@@ -31,26 +32,23 @@ class UserType extends AbstractType
         $builder
             ->add('full_name', 'text', array(
                 'label' => 'form.label.full_name',
-                'attr' => array('title' => 'form.tooltip.full_name'),
             ))
             ->add('username', 'text', array(
                 'label' => 'form.label.username',
-                'attr' => array('title' => 'form.tooltip.username'),
             ))
             ->add('email', 'email', array(
                 'label' => 'form.label.email',
-                'attr' => array('title' => 'form.tooltip.email'),
             ))
             ->add('password', 'password', array(
                 'label' => 'form.label.password',
-                'attr' => array('title' => 'form.tooltip.password'),
             ))
-            ->add('roles', 'choice', array(
-                'label' => 'form.label.role',
-                'choice_list' => new ChoiceList($this->roleHierarchy, $this->roleHierarchy),
-                'empty_value' => 'form.select.empty',
-                'attr' => array('title' => 'form.tooltip.role'),
-            ))
+            ->add($builder->create(
+                'roles', 'choice', array(
+                    'label' => 'form.label.role',
+                    'choice_list' => new ChoiceList($this->roleHierarchy, $this->roleHierarchy),
+                    'empty_value' => 'form.select.empty',
+                )
+            )->addModelTransformer(new RoleToArrayTransformer()))
         ;
     }
 
