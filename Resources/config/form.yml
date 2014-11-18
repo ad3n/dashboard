@@ -13,4 +13,8 @@ services:
 
   app.form.kabupaten:
      class: AppBundle\Form\KabupatenType
-     arguments: [@males.guesser]
+     arguments: [@males.guesser, @doctrine.orm.entity_manager]
+
+  app.form.kecamatan:
+     class: AppBundle\Form\KecamatanType
+     arguments: [@males.guesser, @doctrine.orm.entity_manager]

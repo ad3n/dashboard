@@ -9,14 +9,38 @@
 namespace AppBundle\Form\DataTransformer;
 
 use AppBundle\Entity\Wilayah;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class WilayahToCodeTransformer implements DataTransformerInterface
 {
+    protected $objectManager;
+
+    protected $entity;
+
+    protected $scope;
+
+    public function __construct(ObjectManager $objectManager, $entity, $scope)
+    {
+        $this->objectManager = $objectManager;
+        $this->entity = $entity;
+        $this->scope = $scope;
+    }
+
     public function transform($code)
     {
-        return $code;
+        if (null === $code) {
+            return $code;
+        }
+
+        $wilayah = $this->objectManager->getRepository($this->entity)->findOneBy(array(sprintf('code%s', ucfirst($this->scope)) => $code));
+
+        if (! $wilayah) {
+            throw new TransformationFailedException(sprintf('Data with code %s not found.', $code));
+        }
+
+        return $wilayah;
     }
 
     public function reverseTransform($wilayah)

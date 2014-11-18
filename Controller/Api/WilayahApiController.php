@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 class WilayahApiController extends ApiController
 {
     /**
-     * @Route("/{node}/{id}/{data}", name="api_wilayah_find", defaults={"data" = "current"})
+     * @Route("/{node}/{id}/{data}", name="api_wilayah_find", defaults={"data" = "current"}, options={"exposed" = true})
      * @Method("GET")
      *
      * @param string $node

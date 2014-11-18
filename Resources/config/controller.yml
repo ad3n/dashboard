@@ -14,3 +14,7 @@ services:
   app.controller.kabupaten:
     class: AppBundle\Controller\KabupatenController
     arguments: [@service_container, @app.form.kabupaten, @app.entity.wilayah]
+
+  app.controller.kecamatan:
+    class: AppBundle\Controller\KecamatanController
+    arguments: [@service_container, @app.form.kecamatan, @app.entity.wilayah]

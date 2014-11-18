@@ -8,6 +8,10 @@ form:
     password: 'Kata Sandi'
     email: 'Email'
     role: 'Hak Akses'
+    propinsi: 'Propinsi'
+    kabupaten: 'Kabupaten'
+    kecamatan: 'Kecamatan'
+    kelurahan: 'Kelurahan'
   select:
     empty: '---PILIHAN---'
   button:

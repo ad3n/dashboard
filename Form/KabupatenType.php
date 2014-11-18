@@ -8,6 +8,7 @@
  **/
 namespace AppBundle\Form;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -19,18 +20,21 @@ class KabupatenType extends AbstractType
 {
     const FORM_NAME = 'user';
 
-    public function __construct(BundleGuesserInterface $guesser)
+    protected $objectManager;
+
+    public function __construct(BundleGuesserInterface $guesser, ObjectManager $objectManager)
     {
+        $this->objectManager = $objectManager;
         parent::__construct($guesser);
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new WilayahToCodeTransformer();
+        $transformer = new WilayahToCodeTransformer($this->objectManager, $this->guesser->getEntityAlias(), 'propinsi');
         $builder
             ->add($builder->create(
                 'code_propinsi', 'entity', array(
-                    'label' => 'form.label.code',
+                    'label' => 'form.label.propinsi',
                     'class' => $this->guesser->getEntityClass(),
                     'empty_value' => 'form.select.empty',
                     'property' => 'name',

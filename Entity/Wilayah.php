@@ -35,7 +35,6 @@ class Wilayah extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
-     * @Assert\Length(min="2", minMessage="form.error.min", max="2", maxMessage="form.error.max")
      **/
     protected $codePropinsi;
 
@@ -44,7 +43,6 @@ class Wilayah extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
-     * @Assert\Length(min="2", minMessage="form.error.min", max="2", maxMessage="form.error.max")
      **/
     protected $codeKabupaten;
 
@@ -53,7 +51,6 @@ class Wilayah extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
-     * @Assert\Length(min="2", minMessage="form.error.min", max="2", maxMessage="form.error.max")
      **/
     protected $codeKecamatan;
 
@@ -62,7 +59,6 @@ class Wilayah extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
-     * @Assert\Length(min="2", minMessage="form.error.min", max="2", maxMessage="form.error.max")
      **/
     protected $codeKelurahan;
 
