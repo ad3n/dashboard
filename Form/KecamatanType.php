@@ -38,7 +38,7 @@ class KecamatanType extends AbstractType
                         'class' => $this->guesser->getEntityClass(),
                         'empty_value' => 'form.select.empty',
                         'property' => 'name',
-                        'action' => 'api_kabupaten_by_propinsi',
+                        'action' => 'api_propinsi_find_kabupaten',
                         'target' => array(
                             'type' => 'class',
                             'selector' => 'kabupaten',

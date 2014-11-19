@@ -32,20 +32,26 @@ class WilayahRepository extends EntityRepository
         return $this->findOneBy(array(
             'codePropinsi' => $codePropinsi,
             'codeKabupaten' => 0,
+            'codeKecamatan' => 0,
+            'codeKelurahan' => 0,
         ));
     }
 
     public function findKabupaten($codeKabupaten)
     {
         return $this->findOneBy(array(
+            'codePropinsi' => '<>',
             'codeKabupaten' => $codeKabupaten,
             'codeKecamatan' => 0,
+            'codeKelurahan' => 0,
         ));
     }
 
     public function findKecamatan($codeKecamatan)
     {
         return $this->findOneBy(array(
+            'codePropinsi' => '<>',
+            'codeKabupaten' => '<>',
             'codeKecamatan' => $codeKecamatan,
             'codeKelurahan' => 0,
         ));
@@ -53,7 +59,12 @@ class WilayahRepository extends EntityRepository
 
     public function findKelurahan($codeKelurahan)
     {
-        return $this->findOneBy(array('codeKelurahan' => $codeKelurahan));
+        return $this->findOneBy(array(
+            'codePropinsi' => '<>',
+            'codeKabupaten' => '<>',
+            'codeKecamatan' => '<>',
+            'codeKelurahan' => $codeKelurahan
+        ));
     }
 
     public function findKabupatenByPropinsi($propinsiId)
@@ -62,7 +73,7 @@ class WilayahRepository extends EntityRepository
             ->andWhere('a.codePropinsi = :propinsi')
             ->andWhere('a.codeKabupaten <> 0')
             ->andWhere('a.codeKecamatan = 0')
-            ->setParameter('propinsi', $propinsiId)
+            ->setParameter('propinsi', $this->convertIdToCode($propinsiId, 'propinsi'))
             ->getQuery()
             ->getResult()
         ;
@@ -95,5 +106,12 @@ class WilayahRepository extends EntityRepository
         ;
 
         return new ArrayCollection($qb);
+    }
+
+    protected function convertIdToCode($id, $scope)
+    {
+        $entity = $this->find($id);
+
+        return call_user_func(array($entity, sprintf('getCode%s', ucfirst($scope))));
     }
 }

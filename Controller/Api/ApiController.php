@@ -25,4 +25,9 @@ class ApiController extends Controller
 
         return $serializer->serialize($data, $type, $format);
     }
+
+    protected function getEntityAlias($entityClassName = null)
+    {
+        return $this->container->get('males.guesser')->initialize($this, $entityClassName)->getEntityAlias();
+    }
 } 

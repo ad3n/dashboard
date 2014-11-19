@@ -44,9 +44,6 @@
     <link rel="apple-touch-startup-image" href="/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
     <link rel="apple-touch-startup-image" href="/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
 
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-
     {% spaceless %}
         {% javascripts
         'js/plugin/pace/pace.min.js'
@@ -72,6 +69,8 @@
         'js/app.config.js'
         'js/app.min.js'
         'js/demo.min.js'
+        'bundles/fosjsrouting/js/router.js'
+        'js/fos_js_routes.js'
         %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
