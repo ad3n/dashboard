@@ -34,7 +34,7 @@ class WilayahToCodeTransformer implements DataTransformerInterface
             return $code;
         }
 
-        $wilayah = $this->objectManager->getRepository($this->entity)->findOneBy(array(sprintf('code%s', ucfirst($this->scope)) => $code));
+        $wilayah = call_user_func_array(array($this->objectManager->getRepository($this->entity), 'findOneBy'), array(array(sprintf('code%s', ucfirst($this->scope)) => $code)));
 
         if (! $wilayah) {
             throw new TransformationFailedException(sprintf('Data with code %s not found.', $code));
@@ -49,6 +49,8 @@ class WilayahToCodeTransformer implements DataTransformerInterface
             throw new TransformationFailedException('The value must be instance of AppBundle\\Entity\\Wilayah');
         }
 
-        return $wilayah->getCodePropinsi();
+        $scope = $this->scope;
+
+        return call_user_func(array($wilayah, sprintf('getCode%s', $scope)));
     }
 }

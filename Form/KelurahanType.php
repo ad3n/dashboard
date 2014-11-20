@@ -18,7 +18,7 @@ use Ihsan\MalesBundle\Form\AbstractType;
 use Ihsan\MalesBundle\Guesser\BundleGuesserInterface;
 use AppBundle\Form\DataTransformer\WilayahToCodeTransformer;
 
-class KecamatanType extends AbstractType
+class KelurahanType extends AbstractType
 {
     const FORM_NAME = 'kecamatan';
 
@@ -52,6 +52,7 @@ jQuery.each(data, function(key, value) {
     html = html + '<option value="' + value.id + '">' + value.name + '</option>';
 });
 jQuery('%this%').empty().append(html);
+jQuery('%this%').trigger('change');
 EOD
 
                         ),
@@ -66,13 +67,34 @@ EOD
                     )
                 )->addModelTransformer($propinsi)
             )
-            ->add('code_kabupaten', 'choice', array(
+            ->add('code_kabupaten', 'xchoice', array(
                 'label' => 'form.label.kabupaten',
+                'action' => 'api_kabupaten_find_kecamatan',
                 'attr' => array(
                     'class' => 'kabupaten'
+                ),
+                'target' => array(
+                    'type' => 'class',
+                    'selector' => 'kecamatan',
+                    'handler' =>
+<<<EOD
+data = JSON.parse(data);
+html = '';
+jQuery.each(data, function(key, value) {
+    html = html + '<option value="' + value.id + '">' + value.name + '</option>';
+});
+jQuery('%this%').empty().append(html);
+EOD
+
+                ),
+            ))
+            ->add('code_kecamatan', 'choice', array(
+                'label' => 'form.label.kecamatan',
+                'attr' => array(
+                    'class' => 'kecamatan'
                 )
             ))
-            ->add('code_kecamatan', 'text', array(
+            ->add('code_kelurahan', 'text', array(
                 'label' => 'form.label.code',
             ))
             ->add('name', 'text', array(
@@ -97,6 +119,22 @@ EOD
                             ->andWhere('a.codeKecamatan = 0')
                             ->andWhere('a.codeKelurahan = 0')
                             ->setParameter('propinsi', $propinsi->getCodePropinsi())
+                            ;
+                    },
+                ));
+
+                $form->remove('code_kecamatan');
+                $form->add('code_kecamatan', 'kecamatan', array(
+                    'class' => $this->guesser->getEntityClass(),
+                    'query_builder' => function(EntityRepository $er ) use ($data) {
+                        $kabupaten = $er->find($data['code_kabupaten']);
+
+                        return $er->createQueryBuilder('a')
+                            ->andWhere('a.codePropinsi <> 0')
+                            ->andWhere('a.codeKabupaten = :kabupaten')
+                            ->andWhere('a.codeKecamatan <> 0')
+                            ->andWhere('a.codeKelurahan = 0')
+                            ->setParameter('kabupaten', $kabupaten->getCodeKabupaten())
                             ;
                     },
                 ));
@@ -127,6 +165,25 @@ EOD
                             'class' => 'kabupaten'
                         )
                     ));
+
+                    $form->remove('code_kecamatan');
+                    $form->add('code_kecamatan', 'kecamatan', array(
+                        'class' => $this->guesser->getEntityClass(),
+                        'query_builder' => function(EntityRepository $er ) use ($data) {
+
+                            return $er->createQueryBuilder('a')
+                                ->andWhere('a.codePropinsi <> 0')
+                                ->andWhere('a.codeKabupaten = :kabupaten')
+                                ->andWhere('a.codeKecamatan <> 0')
+                                ->andWhere('a.codeKelurahan = 0')
+                                ->setParameter('kabupaten', $data->getCodeKabupaten())
+                                ;
+                        },
+                        'label' => 'form.label.kecamatan',
+                        'attr' => array(
+                            'class' => 'kecamatan'
+                        )
+                    ));
                 }
             }
         );
@@ -145,4 +202,4 @@ EOD
     {
         return self::FORM_NAME;
     }
-}
+} 

@@ -83,11 +83,15 @@ class WilayahRepository extends EntityRepository
 
     public function findKecamatanByKabupaten($kabupatenId)
     {
+        $entity = $this->find($kabupatenId);
+
         $qb = $this->createQueryBuilder('a')
+            ->andWhere('a.codePropinsi = :propinsi')
             ->andWhere('a.codeKabupaten = :kabupaten')
             ->andWhere('a.codeKecamatan <> 0')
             ->andWhere('a.codeKelurahan = 0')
-            ->setParameter('kabupaten', $kabupatenId)
+            ->setParameter('propinsi', $entity->getCodePropinsi())
+            ->setParameter('kabupaten', $this->convertIdToCode($kabupatenId, 'kabupaten'))
             ->getQuery()
             ->getResult()
         ;
@@ -100,7 +104,7 @@ class WilayahRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a')
             ->andWhere('a.codeKecamatan = :kecamatan')
             ->andWhere('a.codeKelurahan <> 0')
-            ->setParameter('kecamatan', $kecamatanId)
+            ->setParameter('kecamatan', $this->convertIdToCode($kecamatanId, 'kecamatan'))
             ->getQuery()
             ->getResult()
         ;

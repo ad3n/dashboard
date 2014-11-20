@@ -1,6 +1,6 @@
 {% extends 'AppBundle:Layout:main.html.twig' %}
 {% trans_default_domain 'AppBundle' %}
-{% set path = path('kabupaten_create') %}
+{% set path = path('kecamatan_create') %}
 
 {% block content %}
     <section id="widget-grid" class="">
@@ -9,7 +9,7 @@
                 <div class="jarviswidget jarviswidget-sortable">
                     <header role="heading">
                         <span class="widget-icon"> <i class="fa fa-crosshairs"></i> </span>
-                        <h2>TAMBAH KABUPATEN</h2>
+                        <h2>TAMBAH KECAMATAN</h2>
                         <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
                     </header>
                     <div role="content">
@@ -19,19 +19,19 @@
                             {{ form_start(form, {'action': path, 'method': 'POST', attr: {'class': 'smart-form'}}) }}
                             <fieldset>
                                 <div class="row">
-                                    <section class="col col-4">
+                                    <section class="col col-6">
                                         {{ form_row(form.code_propinsi) }}
                                         {{ form.code_propinsi.vars.script | raw }}
                                     </section>
-                                    <section class="col col-8">
+                                    <section class="col col-6">
                                         {{ form_row(form.code_kabupaten) }}
                                     </section>
                                 </div>
                                 <div class="row">
-                                    <section class="col col-4">
+                                    <section class="col col-6">
                                         {{ form_row(form.code_kecamatan) }}
                                     </section>
-                                    <section class="col col-8">
+                                    <section class="col col-6">
                                         {{ form_row(form.name) }}
                                     </section>
                                 </div>

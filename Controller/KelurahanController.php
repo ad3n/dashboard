@@ -19,9 +19,9 @@ use Ihsan\MalesBundle\Entity\EntityInterface;
 use Ihsan\MalesBundle\IhsanMalesBundle as Constant;
 
 /**
- * @Route("/admin/kecamatan", service="app.controller.kecamatan")
+ * @Route("/admin/kelurahan", service="app.controller.kelurahan")
  **/
-class KecamatanController extends CrudController
+class KelurahanController extends CrudController
 {
     public function __construct(ContainerInterface $container, AbstractType $formType, EntityInterface $entity)
     {
@@ -29,7 +29,7 @@ class KecamatanController extends CrudController
     }
 
     /**
-     * @Route("/new/", name="kecamatan_create")
+     * @Route("/new/", name="kelurahan_create")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -42,7 +42,7 @@ class KecamatanController extends CrudController
     }
 
     /**
-     * @Route("/", name="kecamatan_index")
+     * @Route("/", name="kelurahan_index")
      * @Method({"GET"})
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -63,8 +63,8 @@ class KecamatanController extends CrudController
             ->andWhere('o.codePropinsi <> 0')
             ->andWhere('o.codeKabupaten <> 0')
             ->andWhere('o.codeKecamatan <> 0')
-            ->andWhere('o.codeKelurahan = 0')
-            ->addOrderBy('o.codeKecamatan', 'DESC');
+            ->andWhere('o.codeKelurahan <> 0')
+            ->addOrderBy('o.codeKelurahan', 'DESC');
         $filter = $toUpperFilter ? strtoupper($request->query->get('filter')) : $request->query->get('filter');
 
         if ($filter) {
@@ -91,7 +91,7 @@ class KecamatanController extends CrudController
     }
 
     /**
-     * @Route("/{id}/edit", name="kecamatan_edit")
+     * @Route("/{id}/edit", name="kelurahan_edit")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -104,7 +104,7 @@ class KecamatanController extends CrudController
     }
 
     /**
-     * @Route("/{id}/delete", name="kecamatan_delete")
+     * @Route("/{id}/delete", name="kelurahan_delete")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_ADMIN')")
      *
@@ -117,7 +117,7 @@ class KecamatanController extends CrudController
     }
 
     /**
-     * @Route("/{id}/show", name="kecamatan_show")
+     * @Route("/{id}/show", name="kelurahan_show")
      * @Method({"GET"})
      * @Security("has_role('ROLE_ADMIN')")
      *

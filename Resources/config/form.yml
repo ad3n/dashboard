@@ -15,6 +15,22 @@ services:
      class: AppBundle\Form\KabupatenType
      arguments: [@males.guesser, @doctrine.orm.entity_manager]
 
+  app.form.kabupaten_type:
+     class: AppBundle\Form\KabupatenWithTransformerType
+     arguments: [@doctrine.orm.entity_manager]
+     tags:
+      - { name: form.type, alias: kabupaten }
+
+  app.form.kecamatan_type:
+     class: AppBundle\Form\KecamatanWithTransformerType
+     arguments: [@doctrine.orm.entity_manager]
+     tags:
+      - { name: form.type, alias: kecamatan }
+
   app.form.kecamatan:
      class: AppBundle\Form\KecamatanType
+     arguments: [@males.guesser, @doctrine.orm.entity_manager]
+
+  app.form.kelurahan:
+     class: AppBundle\Form\KelurahanType
      arguments: [@males.guesser, @doctrine.orm.entity_manager]

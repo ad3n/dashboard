@@ -29,7 +29,8 @@ services:
 
   app.twig.function.wilayah:
     class: AppBundle\Twig\CodeToWilayahFunction
-    arguments: [@doctrine.orm.entity_manager]
+    arguments:
+      - @doctrine.orm.entity_manager
     tags:
       - { name: twig.extension }
 

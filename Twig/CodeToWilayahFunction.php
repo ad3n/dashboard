@@ -26,11 +26,23 @@ class CodeToWilayahFunction extends \Twig_Extension
         );
     }
 
-    public function toWilayah($code, $scope)
+    public function toWilayah($code, $scope, $parentCode = null)
     {
-        return $this->objectManager->getRepository('AppBundle:Wilayah')->findOneBy(array(
-            sprintf('code%s', ucfirst($scope)) => $code
-        ));
+        $condition[sprintf('code%s', ucfirst($scope))] = $code;
+
+        switch ($scope) {
+            case 'kabupaten':
+                $condition['codePropinsi'] = $parentCode;
+                break;
+            case 'kecamatan':
+                $condition['codeKabupaten'] = $parentCode;
+                break;
+            case 'kelurahan':
+                $condition['codeKecamatan'] = $parentCode;
+                break;
+        }
+
+        return $this->objectManager->getRepository('AppBundle:Wilayah')->findOneBy($condition);
     }
 
     public function getName()

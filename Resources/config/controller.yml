@@ -18,3 +18,7 @@ services:
   app.controller.kecamatan:
     class: AppBundle\Controller\KecamatanController
     arguments: [@service_container, @app.form.kecamatan, @app.entity.wilayah]
+
+  app.controller.kelurahan:
+    class: AppBundle\Controller\KelurahanController
+    arguments: [@service_container, @app.form.kelurahan, @app.entity.wilayah]
