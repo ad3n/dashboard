@@ -26,20 +26,12 @@ class CodeToWilayahFunction extends \Twig_Extension
         );
     }
 
-    public function toWilayah($code, $scope, $parentCode = null)
+    public function toWilayah($code, $scope, array $filter = array())
     {
         $condition[sprintf('code%s', ucfirst($scope))] = $code;
 
-        switch ($scope) {
-            case 'kabupaten':
-                $condition['codePropinsi'] = $parentCode;
-                break;
-            case 'kecamatan':
-                $condition['codeKabupaten'] = $parentCode;
-                break;
-            case 'kelurahan':
-                $condition['codeKecamatan'] = $parentCode;
-                break;
+        if (! empty($filter)) {
+            $condition = array_merge($condition, $filter);
         }
 
         return $this->objectManager->getRepository('AppBundle:Wilayah')->findOneBy($condition);

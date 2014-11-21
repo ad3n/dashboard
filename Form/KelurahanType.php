@@ -51,8 +51,8 @@ html = '';
 jQuery.each(data, function(key, value) {
     html = html + '<option value="' + value.id + '">' + value.name + '</option>';
 });
-jQuery('%this%').empty().append(html);
-jQuery('%this%').trigger('change');
+jQuery('%target-selector%').empty().append(html);
+jQuery('%target-selector%').trigger('change');
 EOD
 
                         ),
@@ -83,7 +83,7 @@ html = '';
 jQuery.each(data, function(key, value) {
     html = html + '<option value="' + value.id + '">' + value.name + '</option>';
 });
-jQuery('%this%').empty().append(html);
+jQuery('%target-selector%').empty().append(html);
 EOD
 
                 ),
@@ -148,7 +148,7 @@ EOD
 
                 if (null !== $data->getId()) {
                     $form->remove('code_kabupaten');
-                    $form->add('code_kabupaten', 'kabupaten', array(
+                    $form->add('code_kabupaten', 'xkabupaten', array(
                         'class' => $this->guesser->getEntityClass(),
                         'query_builder' => function(EntityRepository $er ) use ($data) {
 
@@ -163,7 +163,21 @@ EOD
                         'label' => 'form.label.kabupaten',
                         'attr' => array(
                             'class' => 'kabupaten'
-                        )
+                        ),
+                        'target' => array(
+                            'type' => 'class',
+                            'selector' => 'kecamatan',
+                            'handler' =>
+<<<EOD
+data = JSON.parse(data);
+html = '';
+jQuery.each(data, function(key, value) {
+    html = html + '<option value="' + value.id + '">' + value.name + '</option>';
+});
+jQuery('%target-selector%').empty().append(html);
+EOD
+
+                        ),
                     ));
 
                     $form->remove('code_kecamatan');
@@ -172,10 +186,11 @@ EOD
                         'query_builder' => function(EntityRepository $er ) use ($data) {
 
                             return $er->createQueryBuilder('a')
-                                ->andWhere('a.codePropinsi <> 0')
+                                ->andWhere('a.codePropinsi = :propinsi')
                                 ->andWhere('a.codeKabupaten = :kabupaten')
                                 ->andWhere('a.codeKecamatan <> 0')
                                 ->andWhere('a.codeKelurahan = 0')
+                                ->setParameter('propinsi', $data->getCodePropinsi())
                                 ->setParameter('kabupaten', $data->getCodeKabupaten())
                                 ;
                         },

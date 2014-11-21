@@ -16,8 +16,8 @@
                         </div>
                         <div class="widget-body padding-7">
                             <h3>Anda yakin akan menghapus '{{ data.name }}'?</h3>
-                            <form action="{{ path('kecamatan_delete', {'id': data.id}) }}" method="post">
-                                <a href = "{{ path('kecamatan_index') }}" class="btn btn-primary margin-right-5">
+                            <form action="{{ path('kelurahan_delete', {'id': data.id}) }}" method="post">
+                                <a href = "{{ path('kelurahan_index') }}" class="btn btn-primary margin-right-5">
                                     {{ 'action.reject' | trans }}
                                 </a>
                                 <button class="btn btn-danger" type="submit">{{ 'action.delete' | trans }}</button>

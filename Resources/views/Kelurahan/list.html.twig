@@ -78,8 +78,8 @@
                                             <td>{{ start + key + 1 }}</td>
                                             <td>{{ record.codeKelurahan }}</td>
                                             <td>{{ wilayah(record.codePropinsi, 'propinsi').name }}</td>
-                                            <td>{{ wilayah(record.codeKabupaten, 'kabupaten', record.codePropinsi).name }}</td>
-                                            <td>{{ wilayah(record.codeKecamatan, 'kecamatan', record.codeKabupaten).name }}</td>
+                                            <td>{{ wilayah(record.codeKabupaten, 'kabupaten', {'codePropinsi': record.codePropinsi}) }}</td>
+                                            <td>{{ wilayah(record.codeKecamatan, 'kecamatan', {'codePropinsi': record.codePropinsi, 'codeKabupaten': record.codeKabupaten}) }}</td>
                                             <td>{{ record.name | bold_keyword(filter) | raw }}</td>
                                             <td>
                                                 <a href = "{{ path('kelurahan_show', {'id': record.id}) }}" class="btn btn-labeled btn-success">

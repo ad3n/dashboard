@@ -51,7 +51,7 @@ html = '';
 jQuery.each(data, function(key, value) {
     html = html + '<option value="' + value.id + '">' + value.name + '</option>';
 });
-jQuery('%this%').empty().append(html);
+jQuery('%target-selector%').empty().append(html);
 EOD
 
                         ),

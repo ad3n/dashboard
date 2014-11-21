@@ -21,6 +21,12 @@ services:
      tags:
       - { name: form.type, alias: kabupaten }
 
+  app.form.ajax_kabupaten_type:
+     class: AppBundle\Form\AjaxKabupatenWithTransformerType
+     arguments: [@doctrine.orm.entity_manager]
+     tags:
+      - { name: form.type, alias: xkabupaten }
+
   app.form.kecamatan_type:
      class: AppBundle\Form\KecamatanWithTransformerType
      arguments: [@doctrine.orm.entity_manager]

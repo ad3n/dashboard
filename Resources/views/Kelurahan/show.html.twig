@@ -24,15 +24,21 @@
                                         </section>
                                         <section class="col col-6">
                                             <label class="label">{{ 'form.label.kabupaten' | trans }}</label>
-                                            <label class="input">{{ wilayah(data.codeKabupaten, 'kabupaten', data.codePropinsi) }}</label>
+                                            <label class="input">{{ wilayah(data.codeKabupaten, 'kabupaten', {'codePropinsi': data.codePropinsi}) }}</label>
                                         </section>
                                     </div>
                                     <div class="row">
                                         <section class="col col-6">
-                                            <label class="label">{{ 'form.label.code' | trans }}</label>
-                                            <label class="input">{{ data.codeKecamatan }}</label>
+                                            <label class="label">{{ 'form.label.kecamatan' | trans }}</label>
+                                            <label class="input">{{ wilayah(data.codeKecamatan, 'kecamatan', {'codePropinsi': data.codePropinsi, 'codeKabupaten': data.codeKabupaten}) }}</label>
                                         </section>
                                         <section class="col col-6">
+                                            <label class="label">{{ 'form.label.code' | trans }}</label>
+                                            <label class="input">{{ data.codeKelurahan }}</label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-lg-12">
                                             <label class="label">{{ 'form.label.name' | trans }}</label>
                                             <label class="input">{{ data.name }}</label>
                                         </section>

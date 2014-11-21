@@ -1,6 +1,6 @@
 {% extends 'AppBundle:Layout:main.html.twig' %}
 {% trans_default_domain 'AppBundle' %}
-{% set path = path('kecamatan_edit', {'id' : id}) %}
+{% set path = path('kelurahan_edit', {'id' : id}) %}
 
 {% block content %}
     <section id="widget-grid" class="">
@@ -25,13 +25,19 @@
                                     </section>
                                     <section class="col col-6">
                                         {{ form_row(form.code_kabupaten) }}
+                                        {{ form.code_kabupaten.vars.script | raw }}
                                     </section>
                                 </div>
                                 <div class="row">
-                                    <section class="col col-4">
+                                    <section class="col col-6">
                                         {{ form_row(form.code_kecamatan) }}
                                     </section>
-                                    <section class="col col-8">
+                                    <section class="col col-6">
+                                        {{ form_row(form.code_kelurahan) }}
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-lg-12">
                                         {{ form_row(form.name) }}
                                     </section>
                                 </div>
