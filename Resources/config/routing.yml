@@ -1,8 +1,3 @@
-home:
-    path:     /
-    methods:  [GET]
-    defaults: { _controller: AppBundle:Home:index }
-
 home_dashboard:
     path:     /admin/demo/dashboard/
     methods:  [GET]

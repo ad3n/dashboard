@@ -13,8 +13,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class HomeController extends Controller
 {
+    /**
+     * @Route("/", name="")
+     **/
     public function indexAction()
     {
-        return $this->redirect($this->generateUrl('home_dashboard'));
+        return $this->render('AppBundle:Home:index.html.twig');
     }
 }
