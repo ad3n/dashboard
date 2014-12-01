@@ -24,5 +24,11 @@ class AppExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $count = $config['block']['count'];
+
+        for ($i = 0; $i < $count; $i++) {
+            $container->setParameter(sprintf('app.block.%d', $i), sprintf('%s%d', $config['block']['name'], $i));
+        }
     }
 }
