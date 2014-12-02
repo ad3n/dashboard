@@ -22,3 +22,7 @@ services:
   app.controller.kelurahan:
     class: AppBundle\Controller\KelurahanController
     arguments: [@service_container, @app.form.kelurahan, @app.entity.wilayah]
+
+  app.controller.block:
+    class: AppBundle\Controller\BlockController
+    arguments: [@service_container, @app.form.block, @app.entity.block]

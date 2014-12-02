@@ -1,0 +1,49 @@
+{% extends 'AppBundle:Layout:main.html.twig' %}
+{% trans_default_domain 'AppBundle' %}
+
+{% block content %}
+<section id="widget-grid" class="">
+<div class="row">
+    <article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+        <div class="jarviswidget jarviswidget-sortable">
+            <header role="heading">
+                <span class="widget-icon"> <i class="fa fa-crosshairs"></i> </span>
+                <h2>DETAIL INDIKATOR</h2>
+                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+            <div role="content">
+                <div class="jarviswidget-editbox">
+                </div>
+                <div class="widget-body no-padding">
+                    <div class="smart-form">
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="label">{{ 'form.label.parent' | trans }}</label>
+                                <label class="input">{{ data.parent }}</label>
+                            </section>
+                            <section class="col col-6">
+                                <label class="label">{{ 'form.label.code' | trans }}</label>
+                                <label class="input">{{ data.code }}</label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-lg-12">
+                                <label class="label">{{ 'form.label.name' | trans }}</label>
+                                <label class="input">{{ data.name }}</label>
+                            </section>
+                        </div>
+                    </fieldset>
+                    <footer>
+                        <a href = "{{ app.request.headers.get('referer') }}" class="btn btn-primary">
+                            {{ 'action.back' | trans }}
+                        </a>
+                    </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
+</section>
+{% endblock %}

@@ -40,3 +40,7 @@ services:
   app.form.kelurahan:
      class: AppBundle\Form\KelurahanType
      arguments: [@males.guesser, @doctrine.orm.entity_manager]
+
+  app.form.block:
+     class: AppBundle\Form\BlockType
+     arguments: [@males.guesser, @doctrine.orm.entity_manager]

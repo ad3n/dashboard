@@ -7,3 +7,6 @@ services:
 
   app.entity.wilayah:
     class: AppBundle\Entity\Wilayah
+
+  app.entity.block:
+    class: AppBundle\Entity\Block
