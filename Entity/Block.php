@@ -40,21 +40,12 @@ class Block extends AbstractEntity
     protected $blockId;
 
     /**
-     * @ORM\Column(name="chart_type", type="string", length=17)
-     *
-     * @Serialize\Expose
-     * @Assert\NotBlank
-     * @Assert\Length(min="2", minMessage="form.error.min", max="17", maxMessage="form.error.max")
-     **/
-    protected $chartType;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Indikator", inversedBy="block")
-     * @ORM\JoinColumn(name="indikator_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Chart", inversedBy="block")
+     * @ORM\JoinColumn(name="chart_id", referencedColumnName="id")
      *
      * @Serialize\Expose
      **/
-    protected $indikator;
+    protected $chart;
 
     /**
      * @ORM\Column(name="status", type="boolean")
@@ -111,29 +102,6 @@ class Block extends AbstractEntity
     }
 
     /**
-     * Set chartType
-     *
-     * @param string $chartType
-     * @return Block
-     */
-    public function setChartType($chartType)
-    {
-        $this->chartType = $chartType;
-
-        return $this;
-    }
-
-    /**
-     * Get chartType
-     *
-     * @return string 
-     */
-    public function getChartType()
-    {
-        return $this->chartType;
-    }
-
-    /**
      * Set status
      *
      * @param boolean $status
@@ -157,25 +125,25 @@ class Block extends AbstractEntity
     }
 
     /**
-     * Set indikator
+     * Set chart
      *
-     * @param Indikator $indikator
+     * @param Chart $chart
      * @return Block
      */
-    public function setIndikator(Indikator $indikator = null)
+    public function setChart(Chart $chart = null)
     {
-        $this->indikator = $indikator;
+        $this->chart = $chart;
 
         return $this;
     }
 
     /**
-     * Get indikator
+     * Get chart
      *
-     * @return Indikator
+     * @return Chart
      */
-    public function getIndikator()
+    public function getChart()
     {
-        return $this->indikator;
+        return $this->chart;
     }
 }

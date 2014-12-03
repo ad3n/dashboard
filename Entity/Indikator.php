@@ -62,11 +62,6 @@ class Indikator extends AbstractEntity
      **/
     protected $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Block", mappedBy="indikator")
-     **/
-    protected $block;
-
     public function __construct()
     {
         $this->child = new ArrayCollection();
@@ -185,38 +180,5 @@ class Indikator extends AbstractEntity
     public function removeChild(Indikator $child)
     {
         $this->child->removeElement($child);
-    }
-
-    /**
-     * Add block
-     *
-     * @param Block $block
-     * @return Indikator
-     */
-    public function addBlock(Block $block)
-    {
-        $this->block[] = $block;
-
-        return $this;
-    }
-
-    /**
-     * Remove block
-     *
-     * @param Block $block
-     */
-    public function removeBlock(Block $block)
-    {
-        $this->block->removeElement($block);
-    }
-
-    /**
-     * Get block
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getBlock()
-    {
-        return $this->block;
     }
 }
