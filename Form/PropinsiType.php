@@ -25,7 +25,7 @@ class PropinsiType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code_propinsi', 'text', array(
+            ->add('code', 'text', array(
                 'label' => 'form.label.code',
             ))
             ->add('name', 'text', array(

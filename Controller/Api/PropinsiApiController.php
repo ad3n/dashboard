@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  **/
 class PropinsiApiController extends ApiController
 {
-    const ENTITY_CLASS_NAME = 'AppBundle\\Entity\\Wilayah';
+    const ENTITY_CLASS_NAME = 'AppBundle\\Entity\\Propinsi';
 
     /**
      * @Route("/find/{codePropinsi}", name="api_propinsi_find", options={"expose"=true})
@@ -32,7 +32,7 @@ class PropinsiApiController extends ApiController
     {
         $repository = $this->getDoctrine()->getRepository($this->getEntityAlias(self::ENTITY_CLASS_NAME));
 
-        $entity = $repository->findPropinsi($codePropinsi);
+        $entity = $repository->findByCode($codePropinsi);
 
         if (! $entity) {
             throw new NotFoundHttpException('Data not found.');

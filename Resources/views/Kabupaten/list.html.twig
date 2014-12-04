@@ -74,7 +74,7 @@
                                     {% for key, record in data %}
                                         <tr>
                                             <td>{{ start + key + 1 }}</td>
-                                            <td>{{ record.codeKabupaten }}</td>
+                                            <td>{{ record.code }}</td>
                                             <td>{{ wilayah(record.codePropinsi, 'propinsi').name }}</td>
                                             <td>{{ record.name | bold_keyword(filter) | raw }}</td>
                                             <td>

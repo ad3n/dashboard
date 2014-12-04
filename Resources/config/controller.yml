@@ -9,19 +9,19 @@ services:
 
   app.controller.propinsi:
     class: AppBundle\Controller\PropinsiController
-    arguments: [@service_container, @app.form.propinsi, @app.entity.wilayah]
+    arguments: [@service_container, @app.form.propinsi, @app.entity.propinsi]
 
   app.controller.kabupaten:
     class: AppBundle\Controller\KabupatenController
-    arguments: [@service_container, @app.form.kabupaten, @app.entity.wilayah]
+    arguments: [@service_container, @app.form.kabupaten, @app.entity.kabupaten]
 
   app.controller.kecamatan:
     class: AppBundle\Controller\KecamatanController
-    arguments: [@service_container, @app.form.kecamatan, @app.entity.wilayah]
+    arguments: [@service_container, @app.form.kecamatan, @app.entity.kecamatan]
 
   app.controller.kelurahan:
     class: AppBundle\Controller\KelurahanController
-    arguments: [@service_container, @app.form.kelurahan, @app.entity.wilayah]
+    arguments: [@service_container, @app.form.kelurahan, @app.entity.kelurahan]
 
   app.controller.block:
     class: AppBundle\Controller\BlockController

@@ -8,5 +8,17 @@ services:
   app.entity.wilayah:
     class: AppBundle\Entity\Wilayah
 
+  app.entity.propinsi:
+    class: AppBundle\Entity\Propinsi
+
+  app.entity.kabupaten:
+    class: AppBundle\Entity\Kabupaten
+
+  app.entity.kecamatan:
+    class: AppBundle\Entity\Kecamatan
+
+  app.entity.kelurahan:
+    class: AppBundle\Entity\Kelurahan
+
   app.entity.block:
     class: AppBundle\Entity\Block

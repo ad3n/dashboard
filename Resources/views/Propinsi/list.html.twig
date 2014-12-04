@@ -73,7 +73,7 @@
                                     {% for key, record in data %}
                                         <tr>
                                             <td>{{ start + key + 1 }}</td>
-                                            <td>{{ record.codePropinsi }}</td>
+                                            <td>{{ record.code }}</td>
                                             <td>{{ record.name | bold_keyword(filter) | raw }}</td>
                                             <td>
                                                 <a href = "{{ path('propinsi_show', {'id': record.id}) }}" class="btn btn-labeled btn-success">

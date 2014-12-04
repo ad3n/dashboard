@@ -33,22 +33,15 @@ class KabupatenType extends AbstractType
         $transformer = new WilayahToCodeTransformer($this->objectManager, $this->guesser->getEntityAlias(), 'propinsi');
         $builder
             ->add($builder->create(
-                'code_propinsi', 'entity', array(
+                'propinsi', 'entity', array(
                     'label' => 'form.label.propinsi',
-                    'class' => $this->guesser->getEntityClass(),
+                    'class' => 'AppBundle\\Entity\\Propinsi',
                     'empty_value' => 'form.select.empty',
                     'property' => 'name',
-                    'query_builder' => function(EntityRepository $er ) {
-                        return $er->createQueryBuilder('a')
-                            ->andWhere('a.codePropinsi <> 0')
-                            ->andWhere('a.codeKabupaten = 0')
-                            ->andWhere('a.codeKecamatan = 0')
-                            ->andWhere('a.codeKelurahan = 0');
-                        }
                     )
                 )->addModelTransformer($transformer)
             )
-            ->add('code_kabupaten', 'text', array(
+            ->add('code', 'text', array(
                 'label' => 'form.label.code',
             ))
             ->add('name', 'text', array(
