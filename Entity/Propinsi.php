@@ -8,11 +8,13 @@
  **/
 namespace AppBundle\Entity;
 
+use AppBundle\Validator\CodableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serialize;
 use Ihsan\MalesBundle\Entity\AbstractEntity;
+use AppBundle\Validator\Constraints as AppAssert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\PropinsiRepository")
@@ -36,6 +38,8 @@ class Propinsi extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
+     *
+     * @AppAssert\UniquePropinsiCode
      **/
     protected $code;
 

@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serialize;
 use Ihsan\MalesBundle\Entity\AbstractEntity;
+use AppBundle\Validator\Constraints as AppAssert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\KelurahanRepository")
@@ -43,6 +44,8 @@ class Kelurahan extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
+     *
+     * @AppAssert\UniqueKelurahanCode
      **/
     protected $code;
 

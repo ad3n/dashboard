@@ -34,17 +34,16 @@ class KelurahanType extends AbstractType
     {
         $propinsi = new WilayahToCodeTransformer($this->objectManager, $this->guesser->getEntityAlias(), 'propinsi');
         $builder
-            ->add($builder->create(
-                    'code_propinsi', 'xentity', array(
-                        'label' => 'form.label.propinsi',
-                        'class' => $this->guesser->getEntityClass(),
-                        'empty_value' => 'form.select.empty',
-                        'property' => 'name',
-                        'action' => 'api_propinsi_find_kabupaten',
-                        'target' => array(
-                            'type' => 'class',
-                            'selector' => 'kabupaten',
-                            'handler' =>
+            ->add('propinsi', 'xentity', array(
+                'label' => 'form.label.propinsi',
+                'class' => $this->guesser->getEntityClass(),
+                'empty_value' => 'form.select.empty',
+                'property' => 'name',
+                'action' => 'api_propinsi_find_kabupaten',
+                'target' => array(
+                    'type' => 'class',
+                    'selector' => 'kabupaten',
+                    'handler' =>
 <<<EOD
 data = JSON.parse(data);
 html = '';
@@ -54,20 +53,9 @@ jQuery.each(data, function(key, value) {
 jQuery('%target-selector%').empty().append(html);
 jQuery('%target-selector%').trigger('change');
 EOD
-
-                        ),
-                        'query_builder' => function(EntityRepository $er ) {
-
-                            return $er->createQueryBuilder('a')
-                                ->andWhere('a.codePropinsi <> 0')
-                                ->andWhere('a.codeKabupaten = 0')
-                                ->andWhere('a.codeKecamatan = 0')
-                                ->andWhere('a.codeKelurahan = 0');
-                        }
-                    )
-                )->addModelTransformer($propinsi)
-            )
-            ->add('code_kabupaten', 'xchoice', array(
+                )
+            ))
+            ->add('kabupaten', 'xchoice', array(
                 'label' => 'form.label.kabupaten',
                 'action' => 'api_kabupaten_find_kecamatan',
                 'attr' => array(

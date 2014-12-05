@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serialize;
 use Ihsan\MalesBundle\Entity\AbstractEntity;
+use AppBundle\Validator\Constraints as AppAssert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\IndikatorRepository")
@@ -45,11 +46,13 @@ class Indikator extends AbstractEntity
     protected $parent;
 
     /**
-     * @ORM\Column(name="code", type="string", length=4)
+     * @ORM\Column(name="code", type="string", length=4, unique=true)
      *
      * @Serialize\Expose
      * @Assert\NotBlank
      * @Assert\Length(min="2", minMessage="form.error.min", max="4", maxMessage="form.error.max")
+     *
+     * @AppAssert\UniqueIndikatorCode
      **/
     protected $code;
 

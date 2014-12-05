@@ -34,6 +34,51 @@ services:
     tags:
       - { name: twig.extension }
 
+  app.validator.propinsi_code:
+    class: AppBundle\Validator\PropinsiCodeValidator
+    arguments:
+      - 'AppBundle:Propinsi'
+      - @doctrine.orm.entity_manager
+      - @translator
+    tags:
+      - { name: validator.constraint_validator, alias: code_propinsi_validator }
+
+  app.validator.kabupaten_code:
+    class: AppBundle\Validator\KabupatenCodeValidator
+    arguments:
+      - 'AppBundle:Kabupaten'
+      - @doctrine.orm.entity_manager
+      - @translator
+    tags:
+      - { name: validator.constraint_validator, alias: code_kabupaten_validator }
+
+  app.validator.kecamatan_code:
+    class: AppBundle\Validator\KecamatanCodeValidator
+    arguments:
+      - 'AppBundle:Kecamatan'
+      - @doctrine.orm.entity_manager
+      - @translator
+    tags:
+      - { name: validator.constraint_validator, alias: code_kecamatan_validator }
+
+  app.validator.kelurahan_code:
+    class: AppBundle\Validator\KelurahanCodeValidator
+    arguments:
+      - 'AppBundle:Kelurahan'
+      - @doctrine.orm.entity_manager
+      - @translator
+    tags:
+      - { name: validator.constraint_validator, alias: code_kelurahan_validator }
+
+  app.validator.indikator_code:
+    class: AppBundle\Validator\IndikatorCodeValidator
+    arguments:
+      - 'AppBundle:Indikator'
+      - @doctrine.orm.entity_manager
+      - @translator
+    tags:
+      - { name: validator.constraint_validator, alias: code_indikator_validator }
+
 imports:
   - { resource: form.yml }
   - { resource: entity.yml }

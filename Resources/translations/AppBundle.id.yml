@@ -20,6 +20,7 @@ form:
     min: 'Jumlah karakter terlalu pendek'
     max: 'Jumlah karakter terlalu panjang'
     not_equal: 'Nilai tidak diijinkan, ganti dengan nilai yang lain.'
+    exist: '%value% tidak dapat digunakan, ganti dengan nilai yang lain.'
 
 action:
   view: 'Tampilkan'
