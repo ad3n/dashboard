@@ -28,11 +28,11 @@ abstract class AbstractCodeValidator extends  ConstraintValidator
         $this->translator = $translator;
     }
 
-    public function validate($value, Constraint $constraint)
+    public function validate($object, Constraint $constraint)
     {
-        if ($this->manager->getRepository($this->class)->findOneBy(array('code' => $value))) {
+        if ($this->manager->getRepository($this->class)->findOneBy(array('code' => $object->getCode())) && null === $object->getId()) {
 
-            $this->context->buildViolation($this->translator->trans('form.error.exist', array('%value%' => $value), 'AppBundle'))
+            $this->context->buildViolation($this->translator->trans('form.error.exist', array('%value%' => $object->getCode()), 'AppBundle'))
                 ->addViolation()
             ;
         }

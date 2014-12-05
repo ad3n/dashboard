@@ -76,10 +76,10 @@
                                     {% for key, record in data %}
                                         <tr>
                                             <td>{{ start + key + 1 }}</td>
-                                            <td>{{ record.codeKelurahan }}</td>
-                                            <td>{{ wilayah(record.codePropinsi, 'propinsi').name }}</td>
-                                            <td>{{ wilayah(record.codeKabupaten, 'kabupaten', {'codePropinsi': record.codePropinsi}) }}</td>
-                                            <td>{{ wilayah(record.codeKecamatan, 'kecamatan', {'codePropinsi': record.codePropinsi, 'codeKabupaten': record.codeKabupaten}) }}</td>
+                                            <td>{{ record.code }}</td>
+                                            <td>{{ record.kecamatan.kabupaten.propinsi }}</td>
+                                            <td>{{ record.kecamatan.kabupaten }}</td>
+                                            <td>{{ record.kecamatan }}</td>
                                             <td>{{ record.name | bold_keyword(filter) | raw }}</td>
                                             <td>
                                                 <a href = "{{ path('kelurahan_show', {'id': record.id}) }}" class="btn btn-labeled btn-success">

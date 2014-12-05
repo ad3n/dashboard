@@ -20,6 +20,8 @@ use AppBundle\Validator\Constraints as AppAssert;
  * @ORM\Table(name="indikator")
  *
  * @Serialize\ExclusionPolicy("all")
+ *
+ * @AppAssert\UniqueIndikatorCode
  **/
 class Indikator extends AbstractEntity
 {
@@ -51,8 +53,6 @@ class Indikator extends AbstractEntity
      * @Serialize\Expose
      * @Assert\NotBlank
      * @Assert\Length(min="2", minMessage="form.error.min", max="4", maxMessage="form.error.max")
-     *
-     * @AppAssert\UniqueIndikatorCode
      **/
     protected $code;
 

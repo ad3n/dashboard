@@ -18,21 +18,19 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  **/
 class KabupatenApiController extends ApiController
 {
-    const ENTITY_CLASS_NAME = 'AppBundle\\Entity\\Wilayah';
-
     /**
-     * @Route("/find/{codePropinsi}", name="api_kabupaten_find", options={"expose"=true})
+     * @Route("/find/{id}", name="api_kabupaten_find", options={"expose"=true})
      * @Method({"GET"})
      *
-     * @param $codePropinsi
+     * @param $id
      * @throws NotFoundHttpException
      * @return \Symfony\Component\HttpFoundation\Response
      **/
-    public function find($codePropinsi)
+    public function find($id)
     {
-        $repository = $this->getDoctrine()->getRepository($this->getEntityAlias(self::ENTITY_CLASS_NAME));
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Kabupaten');
 
-        $entity = $repository->findPropinsi($codePropinsi);
+        $entity = $repository->find($id);
 
         if (! $entity) {
             throw new NotFoundHttpException('Data not found.');
@@ -42,7 +40,7 @@ class KabupatenApiController extends ApiController
     }
 
     /**
-     * @Route("/kecamatan/find/{id}", name="api_kabupaten_find_kecamatan", options={"expose"=true})
+     * @Route("/find/kecamatan/{id}", name="api_kabupaten_find_kecamatan", options={"expose"=true})
      * @Method({"GET"})
      *
      * @param $id
@@ -51,9 +49,9 @@ class KabupatenApiController extends ApiController
      **/
     public function findKecamatanByKabupaten($id)
     {
-        $repository = $this->getDoctrine()->getRepository($this->getEntityAlias(self::ENTITY_CLASS_NAME));
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Kecamatan');
 
-        $entity = $repository->findKecamatanByKabupaten($id);
+        $entity = $repository->findBy(array('kabupaten' => $id), array('name' => 'ASC'));
 
         if (! $entity) {
             throw new NotFoundHttpException('Data not found.');

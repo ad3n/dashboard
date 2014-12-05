@@ -72,8 +72,6 @@ EOD
         $builder->addEventListener(FormEvents::PRE_SUBMIT,
             function (FormEvent $event) use ($builder) {
                 $form = $event->getForm();
-                $data = $event->getData();
-                unset($data['propinsi']);
 
                 $form->remove('kabupaten');
                 $form->add('kabupaten', 'entity', array(
@@ -108,7 +106,8 @@ EOD
                 if (null !== $data->getId()) {
                     $form->get('propinsi')->setData($data->getKabupaten()->getPropinsi());
                 }
-            });
+            }
+        );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

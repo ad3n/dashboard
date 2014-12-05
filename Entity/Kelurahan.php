@@ -19,6 +19,8 @@ use AppBundle\Validator\Constraints as AppAssert;
  * @ORM\Table(name="kelurahan", indexes={@ORM\Index(name="search_idx", columns={"code"})})
  *
  * @Serialize\ExclusionPolicy("all")
+ *
+ * @AppAssert\UniqueKelurahanCode
  **/
 class Kelurahan extends AbstractEntity
 {
@@ -44,8 +46,6 @@ class Kelurahan extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
-     *
-     * @AppAssert\UniqueKelurahanCode
      **/
     protected $code;
 

@@ -21,6 +21,8 @@ use AppBundle\Validator\Constraints as AppAssert;
  * @ORM\Table(name="propinsi", indexes={@ORM\Index(name="search_idx", columns={"code"})})
  *
  * @Serialize\ExclusionPolicy("all")
+ *
+ * @AppAssert\UniquePropinsiCode
  **/
 class Propinsi extends AbstractEntity
 {
@@ -38,8 +40,6 @@ class Propinsi extends AbstractEntity
      *
      * @Serialize\Expose
      * @Assert\NotBlank
-     *
-     * @AppAssert\UniquePropinsiCode
      **/
     protected $code;
 
