@@ -30,17 +30,13 @@ class KabupatenType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new WilayahToCodeTransformer($this->objectManager, $this->guesser->getEntityAlias(), 'propinsi');
         $builder
-            ->add($builder->create(
-                'propinsi', 'entity', array(
-                    'label' => 'form.label.propinsi',
-                    'class' => 'AppBundle\\Entity\\Propinsi',
-                    'empty_value' => 'form.select.empty',
-                    'property' => 'name',
-                    )
-                )->addModelTransformer($transformer)
-            )
+            ->add('propinsi', 'entity', array(
+                'label' => 'form.label.propinsi',
+                'class' => 'AppBundle\\Entity\\Propinsi',
+                'empty_value' => 'form.select.empty',
+                'property' => 'name',
+            ))
             ->add('code', 'text', array(
                 'label' => 'form.label.code',
             ))

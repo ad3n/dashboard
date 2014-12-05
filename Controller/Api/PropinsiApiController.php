@@ -18,8 +18,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  **/
 class PropinsiApiController extends ApiController
 {
-    const ENTITY_CLASS_NAME = 'AppBundle\\Entity\\Propinsi';
-
     /**
      * @Route("/find/{codePropinsi}", name="api_propinsi_find", options={"expose"=true})
      * @Method({"GET"})
@@ -30,7 +28,7 @@ class PropinsiApiController extends ApiController
      **/
     public function find($codePropinsi)
     {
-        $repository = $this->getDoctrine()->getRepository($this->getEntityAlias(self::ENTITY_CLASS_NAME));
+        $repository = $this->getDoctrine()->getRepository($this->getEntityAlias('AppBundle\\Entity\\Propinsi'));
 
         $entity = $repository->findByCode($codePropinsi);
 
@@ -42,7 +40,7 @@ class PropinsiApiController extends ApiController
     }
 
     /**
-     * @Route("/kabupaten/find/{id}", name="api_propinsi_find_kabupaten", options={"expose"=true})
+     * @Route("/find/kabupaten/{id}", name="api_propinsi_find_kabupaten", options={"expose"=true})
      * @Method({"GET"})
      *
      * @param $id
@@ -51,9 +49,9 @@ class PropinsiApiController extends ApiController
      **/
     public function findKabupatenByPropinsi($id)
     {
-        $repository = $this->getDoctrine()->getRepository($this->getEntityAlias(self::ENTITY_CLASS_NAME));
+        $repository = $this->getDoctrine()->getRepository($this->getEntityAlias('AppBundle\\Entity\\Kabupaten'));
 
-        $entity = $repository->findKabupatenByPropinsi($id);
+        $entity = $repository->findBy(array('propinsi' => $id));
 
         if (! $entity) {
             throw new NotFoundHttpException('Data not found.');

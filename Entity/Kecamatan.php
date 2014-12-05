@@ -75,6 +75,15 @@ class Kecamatan extends AbstractEntity
         $this->kelurahan = new ArrayCollection();
     }
 
+    public function setPropinsi($propinsi)
+    {
+    }
+
+    public function getPropinsi()
+    {
+        return;
+    }
+
     /**
      * Get id
      *

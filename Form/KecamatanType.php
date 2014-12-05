@@ -32,19 +32,19 @@ class KecamatanType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $propinsi = new WilayahToCodeTransformer($this->objectManager, $this->guesser->getEntityAlias(), 'propinsi');
         $builder
-            ->add($builder->create(
-                    'code_propinsi', 'xentity', array(
-                        'label' => 'form.label.propinsi',
-                        'class' => $this->guesser->getEntityClass(),
-                        'empty_value' => 'form.select.empty',
-                        'property' => 'name',
-                        'action' => 'api_propinsi_find_kabupaten',
-                        'target' => array(
-                            'type' => 'class',
-                            'selector' => 'kabupaten',
-                            'handler' =>
+            ->add(
+                'propinsi', 'xentity', array(
+                'label' => 'form.label.propinsi',
+                'class' => 'AppBundle\\Entity\\Propinsi',
+                'empty_value' => 'form.select.empty',
+                'property' => 'name',
+                'action' => 'api_propinsi_find_kabupaten',
+                'mapped' => false,
+                'target' => array(
+                    'type' => 'class',
+                    'selector' => 'kabupaten',
+                    'handler' =>
 <<<EOD
 data = JSON.parse(data);
 html = '';
@@ -53,26 +53,15 @@ jQuery.each(data, function(key, value) {
 });
 jQuery('%target-selector%').empty().append(html);
 EOD
-
-                        ),
-                        'query_builder' => function(EntityRepository $er ) {
-
-                            return $er->createQueryBuilder('a')
-                                ->andWhere('a.codePropinsi <> 0')
-                                ->andWhere('a.codeKabupaten = 0')
-                                ->andWhere('a.codeKecamatan = 0')
-                                ->andWhere('a.codeKelurahan = 0');
-                        }
-                    )
-                )->addModelTransformer($propinsi)
-            )
-            ->add('code_kabupaten', 'choice', array(
+                )
+            ))
+            ->add('kabupaten', 'choice', array(
                 'label' => 'form.label.kabupaten',
                 'attr' => array(
                     'class' => 'kabupaten'
                 )
             ))
-            ->add('code_kecamatan', 'text', array(
+            ->add('code', 'text', array(
                 'label' => 'form.label.code',
             ))
             ->add('name', 'text', array(
@@ -84,21 +73,11 @@ EOD
             function (FormEvent $event) use ($builder) {
                 $form = $event->getForm();
                 $data = $event->getData();
+                unset($data['propinsi']);
 
-                $form->remove('code_kabupaten');
-                $form->add('code_kabupaten', 'kabupaten', array(
-                    'class' => $this->guesser->getEntityClass(),
-                    'query_builder' => function(EntityRepository $er ) use ($data) {
-                        $propinsi = $er->find($data['code_propinsi']);
-
-                        return $er->createQueryBuilder('a')
-                            ->andWhere('a.codePropinsi = :propinsi')
-                            ->andWhere('a.codeKabupaten <> 0')
-                            ->andWhere('a.codeKecamatan = 0')
-                            ->andWhere('a.codeKelurahan = 0')
-                            ->setParameter('propinsi', $propinsi->getCodePropinsi())
-                            ;
-                    },
+                $form->remove('kabupaten');
+                $form->add('kabupaten', 'entity', array(
+                    'class' => 'AppBundle\\Entity\\Kabupaten',
                 ));
             }
         );
@@ -109,19 +88,9 @@ EOD
                 $data = $event->getData();
 
                 if (null !== $data->getId()) {
-                    $form->remove('code_kabupaten');
-                    $form->add('code_kabupaten', 'kabupaten', array(
-                        'class' => $this->guesser->getEntityClass(),
-                        'query_builder' => function(EntityRepository $er ) use ($data) {
-
-                            return $er->createQueryBuilder('a')
-                                ->andWhere('a.codePropinsi = :propinsi')
-                                ->andWhere('a.codeKabupaten <> 0')
-                                ->andWhere('a.codeKecamatan = 0')
-                                ->andWhere('a.codeKelurahan = 0')
-                                ->setParameter('propinsi', $data->getCodePropinsi())
-                                ;
-                        },
+                    $form->remove('kabupaten');
+                    $form->add('kabupaten', 'entity', array(
+                        'class' => 'AppBundle\\Entity\\Kabupaten',
                         'label' => 'form.label.kabupaten',
                         'attr' => array(
                             'class' => 'kabupaten'
@@ -130,6 +99,16 @@ EOD
                 }
             }
         );
+
+        $builder->addEventListener(FormEvents::POST_SET_DATA,
+            function(FormEvent $event) {
+                $form = $event->getForm();
+                $data = $event->getData();
+
+                if (null !== $data->getId()) {
+                    $form->get('propinsi')->setData($data->getKabupaten()->getPropinsi());
+                }
+            });
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

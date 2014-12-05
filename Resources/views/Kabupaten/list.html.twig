@@ -75,7 +75,7 @@
                                         <tr>
                                             <td>{{ start + key + 1 }}</td>
                                             <td>{{ record.code }}</td>
-                                            <td>{{ wilayah(record.codePropinsi, 'propinsi').name }}</td>
+                                            <td>{{ record.propinsi }}</td>
                                             <td>{{ record.name | bold_keyword(filter) | raw }}</td>
                                             <td>
                                                 <a href = "{{ path('kabupaten_show', {'id': record.id}) }}" class="btn btn-labeled btn-success">
