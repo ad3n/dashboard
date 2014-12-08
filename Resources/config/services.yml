@@ -27,13 +27,6 @@ services:
     tags:
       - { name: twig.extension }
 
-  app.twig.function.wilayah:
-    class: AppBundle\Twig\CodeToWilayahFunction
-    arguments:
-      - @doctrine.orm.entity_manager
-    tags:
-      - { name: twig.extension }
-
   app.validator.propinsi_code:
     class: AppBundle\Validator\PropinsiCodeValidator
     arguments:
