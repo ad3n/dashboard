@@ -33,6 +33,7 @@ abstract class AbstractCodeValidator extends  ConstraintValidator
         if ($this->manager->getRepository($this->class)->findOneBy(array('code' => $object->getCode())) && null === $object->getId()) {
 
             $this->context->buildViolation($this->translator->trans('form.error.exist', array('%value%' => $object->getCode()), 'AppBundle'))
+                ->atPath('code')
                 ->addViolation()
             ;
         }

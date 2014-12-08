@@ -95,6 +95,31 @@ EOD
             function (FormEvent $event) use ($builder) {
                 $form = $event->getForm();
 
+                $form->remove('kabupaten');
+                $form->add('kabupaten', 'xentity', array(
+                    'label' => 'form.label.kabupaten',
+                    'action' => 'api_kabupaten_find_kecamatan',
+                    'attr' => array(
+                        'class' => 'kabupaten'
+                    ),
+                    'class' => 'AppBundle\\Entity\\Kabupaten',
+                    'mapped' => false,
+                    'target' => array(
+                        'type' => 'class',
+                        'selector' => 'kecamatan',
+                        'handler' =>
+                            <<<EOD
+                            data = JSON.parse(data);
+html = '';
+jQuery.each(data, function(key, value) {
+    html = html + '<option value="' + value.id + '">' + value.name + '</option>';
+});
+jQuery('%target-selector%').empty().append(html);
+EOD
+
+                    ),
+                ));
+
                 $form->remove('kecamatan');
                 $form->add('kecamatan', 'entity', array(
                     'class' => 'AppBundle\\Entity\\Kecamatan',
@@ -108,6 +133,31 @@ EOD
                 $data = $event->getData();
 
                 if (null !== $data->getId()) {
+
+                    $form->remove('kabupaten');
+                    $form->add('kabupaten', 'xentity', array(
+                        'label' => 'form.label.kabupaten',
+                        'action' => 'api_kabupaten_find_kecamatan',
+                        'attr' => array(
+                            'class' => 'kabupaten'
+                        ),
+                        'class' => 'AppBundle\\Entity\\Kabupaten',
+                        'mapped' => false,
+                        'target' => array(
+                            'type' => 'class',
+                            'selector' => 'kecamatan',
+                            'handler' =>
+                                <<<EOD
+                                data = JSON.parse(data);
+html = '';
+jQuery.each(data, function(key, value) {
+    html = html + '<option value="' + value.id + '">' + value.name + '</option>';
+});
+jQuery('%target-selector%').empty().append(html);
+EOD
+
+                        ),
+                    ));
 
                     $form->remove('kecamatan');
                     $form->add('kecamatan', 'entity', array(

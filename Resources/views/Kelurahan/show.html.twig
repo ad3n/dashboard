@@ -20,21 +20,21 @@
                                     <div class="row">
                                         <section class="col col-6">
                                             <label class="label">{{ 'form.label.propinsi' | trans }}</label>
-                                            <label class="input">{{ wilayah(data.codePropinsi, 'propinsi') }}</label>
+                                            <label class="input">{{ data.kecamatan.kabupaten.propinsi }}</label>
                                         </section>
                                         <section class="col col-6">
                                             <label class="label">{{ 'form.label.kabupaten' | trans }}</label>
-                                            <label class="input">{{ wilayah(data.codeKabupaten, 'kabupaten', {'codePropinsi': data.codePropinsi}) }}</label>
+                                            <label class="input">{{ data.kecamatan.kabupaten }}</label>
                                         </section>
                                     </div>
                                     <div class="row">
                                         <section class="col col-6">
                                             <label class="label">{{ 'form.label.kecamatan' | trans }}</label>
-                                            <label class="input">{{ wilayah(data.codeKecamatan, 'kecamatan', {'codePropinsi': data.codePropinsi, 'codeKabupaten': data.codeKabupaten}) }}</label>
+                                            <label class="input">{{ data.kecamatan }}</label>
                                         </section>
                                         <section class="col col-6">
                                             <label class="label">{{ 'form.label.code' | trans }}</label>
-                                            <label class="input">{{ data.codeKelurahan }}</label>
+                                            <label class="input">{{ data.code }}</label>
                                         </section>
                                     </div>
                                     <div class="row">
