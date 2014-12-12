@@ -29,7 +29,7 @@ class AddChartCommand extends ContainerAwareCommand
                 new InputArgument('name', InputArgument::REQUIRED, 'Nama chart'),
                 new InputArgument('type', InputArgument::REQUIRED, 'Tipe chart'),
                 new InputArgument('method', InputArgument::REQUIRED, 'Repository method'),
-                new InputOption('description', null, InputOption::VALUE_NONE, 'Deskripsi chart'),
+                new InputOption('description', null, InputOption::VALUE_OPTIONAL, 'Deskripsi chart'),
             ))
         ;
     }

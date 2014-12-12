@@ -9,28 +9,34 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Ihsan\MalesBundle\Guesser\BundleGuesserInterface;
 use Ihsan\MalesBundle\Form\AbstractType;
 
 class BlockType extends AbstractType
 {
     const FORM_NAME = 'block';
 
+    protected $container;
+
+    public function __construct(ContainerInterface $container, BundleGuesserInterface $bundleGuesser)
+    {
+        $this->container = $container;
+        parent::__construct($bundleGuesser);
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('block_id', 'text', array(
+            ->add('block_id', 'choice', array(
                 'label' => 'form.label.block',
+                'choice_list' => new ChoiceList($this->container->getParameter('app.block'), $this->container->getParameter('app.block'))
             ))
-            ->add('chart', 'text', array(
+            ->add('chart', 'entity', array(
                 'label' => 'form.label.chart',
-            ))
-            ->add('indikator', 'entity', array(
-                'class' => 'AppBundle\\Entity\\Indikator',
-                'property' => 'name',
-                'empty_value' => 'form.select.empty',
-                'label' => 'form.label.indikator',
-                'required' => false,
+                'class' => 'AppBundle\\Entity\\Chart',
             ))
         ;
     }

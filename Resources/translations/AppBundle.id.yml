@@ -12,6 +12,9 @@ form:
     kabupaten: 'Kabupaten'
     kecamatan: 'Kecamatan'
     kelurahan: 'Kelurahan'
+    block: 'Block Id'
+    chart: 'Chart'
+    chart_type: 'Tipe Chart'
   select:
     empty: '---PILIHAN---'
   button:

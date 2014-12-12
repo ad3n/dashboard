@@ -104,7 +104,7 @@ class Chart extends AbstractEntity
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = strtoupper($name);
 
         return $this;
     }

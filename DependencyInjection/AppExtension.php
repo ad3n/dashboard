@@ -26,9 +26,12 @@ class AppExtension extends Extension
         $loader->load('services.yml');
 
         $count = $config['block']['count'];
+        $block = array();
 
         for ($i = 0; $i < $count; $i++) {
-            $container->setParameter(sprintf('app.block.%d', $i), sprintf('%s%d', $config['block']['name'], $i));
+            $block[] = $config['block']['name'].$i;
         }
+
+        $container->setParameter('app.block', $block);
     }
 }

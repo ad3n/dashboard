@@ -36,7 +36,7 @@
         <div class="jarviswidget jarviswidget-sortable">
             <header role="heading">
                 <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                <h2>LIST INDIKATOR</h2>
+                <h2>LIST CHART</h2>
                 <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
             </header>
             <div class="clearfix">
@@ -65,8 +65,8 @@
                                 <tr>
                                     <td>No</td>
                                     <td>Block</td>
+                                    <td>Chart</td>
                                     <td>Tipe Chart</td>
-                                    <td>Indikator</td>
                                     <td>Pilihan</td>
                                 </tr>
                             </thead>
@@ -74,9 +74,9 @@
                             {% for key, record in data %}
                                 <tr>
                                     <td>{{ start + key + 1 }}</td>
-                                    <td>{{ record.parent }}</td>
-                                    <td>{{ record.code }}</td>
-                                    <td>{{ record.name | bold_keyword(filter) | raw }}</td>
+                                    <td>{{ record.blockId | bold_keyword(filter) | raw }}</td>
+                                    <td>{{ record.chart }}</td>
+                                    <td>{{ record.chart.type }}</td>
                                     <td>
                                         <a href = "{{ path('block_show', {'id': record.id}) }}" class="btn btn-labeled btn-success">
                                             <span class="btn-label"><i class="glyphicon glyphicon-share"></i></span>

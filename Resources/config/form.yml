@@ -25,4 +25,4 @@ services:
 
   app.form.block:
      class: AppBundle\Form\BlockType
-     arguments: [@males.guesser, @doctrine.orm.entity_manager]
+     arguments: [@service_container, @males.guesser]
