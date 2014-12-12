@@ -36,17 +36,17 @@ class Data extends AbstractEntity
     protected $indikator;
 
     /**
-     * @ORM\Column(name="nominator", type="decimal", scale=12, precision=0)
+     * @ORM\Column(name="nominator", type="decimal", scale=0, precision=12)
      **/
     protected $nominator;
 
     /**
-     * @ORM\Column(name="de_nominator", type="decimal", scale=12, precision=0)
+     * @ORM\Column(name="de_nominator", type="decimal", scale=0, precision=12)
      **/
     protected $deNominator;
 
     /**
-     * @ORM\Column(name="value", type="decimal", scale=12, precision=0)
+     * @ORM\Column(name="value", type="decimal", scale=0, precision=12)
      **/
     protected $value;
 
