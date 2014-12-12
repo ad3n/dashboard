@@ -18,10 +18,6 @@ class HomeController extends Controller
      **/
     public function indexAction()
     {
-//        $accessToken = $this->container->get('security.context')->getToken()->getAccessToken();
-//
-//        var_dump($accessToken);
-
-        return $this->render('AppBundle:Home:index.html.twig');
+        return $this->redirect($this->generateUrl('home_dashboard'));
     }
 }
