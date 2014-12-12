@@ -210,4 +210,27 @@ class Chart extends AbstractEntity
     {
         return $this->block;
     }
+
+    /**
+     * Set chartType
+     *
+     * @param string $chartType
+     * @return Chart
+     */
+    public function setChartType($chartType)
+    {
+        $this->chartType = $chartType;
+
+        return $this;
+    }
+
+    /**
+     * Get chartType
+     *
+     * @return string 
+     */
+    public function getChartType()
+    {
+        return $this->chartType;
+    }
 }
