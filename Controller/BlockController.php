@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Ihsan\MalesBundle\Controller\CrudController;
 use Ihsan\MalesBundle\Form\AbstractType;
 use Ihsan\MalesBundle\Entity\EntityInterface;
+use Ihsan\MalesBundle\IhsanMalesBundle as Constant;
 
 /**
  * @Route("/admin/block", service="app.controller.block")
@@ -37,7 +38,34 @@ class BlockController extends CrudController
      */
     public function newAction(Request $request)
     {
-        return parent::newAction($request);
+        $form = $this->createForm($this->formType, $this->entity);
+
+        if ($request->isMethod('post')) {
+            $em = $this->getDoctrine()->getManager();
+            $form->handleRequest($request);
+
+            if (! $form->isValid()) {
+
+                return $this->render(sprintf('%s:%s:new.html.twig', $this->guesser->getBundleAlias(), $this->guesser->getIdentity()), array(
+                    'form' => $form->createView(),
+                ));
+            }
+
+            $block = $form->getData();
+            $block->setUser($this->getUser());
+
+            $em->persist($block);
+            $em->flush();
+
+            $session = $this->container->get('session');
+            $session->getFlashBag()->set(Constant::MESSAGE_SAVE, $this->get('translator')->trans(Constant::MESSAGE_SAVE, array('data' => $form->getData()->getName()), $this->container->getParameter('bundle')));
+
+            return $this->redirect($this->generateUrl(sprintf('%s_index', strtolower($this->guesser->getIdentity()))));
+        }
+
+        return $this->render(sprintf('%s:%s:new.html.twig', $this->guesser->getBundleAlias(), $this->guesser->getIdentity()), array(
+            'form' => $form->createView(),
+        ));
     }
 
     /**

@@ -15,6 +15,7 @@ form:
     block: 'Block Id'
     chart: 'Chart'
     chart_type: 'Tipe Chart'
+    status: 'Status'
   select:
     empty: '---PILIHAN---'
   button:

@@ -8,6 +8,7 @@
  **/
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serialize;
@@ -83,7 +84,7 @@ class Chart extends AbstractEntity
      */
     public function __construct()
     {
-        $this->block = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->block = new ArrayCollection();
     }
 
     /**

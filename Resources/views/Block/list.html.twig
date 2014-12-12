@@ -67,6 +67,7 @@
                                     <td>Block</td>
                                     <td>Chart</td>
                                     <td>Tipe Chart</td>
+                                    <td>Status</td>
                                     <td>Pilihan</td>
                                 </tr>
                             </thead>
@@ -77,6 +78,7 @@
                                     <td>{{ record.blockId | bold_keyword(filter) | raw }}</td>
                                     <td>{{ record.chart }}</td>
                                     <td>{{ record.chart.type }}</td>
+                                    <td>{% if (record.status) %} {{ 'AKTIF' }} {% else %} {{ 'TIDAK AKTIF' }} {% endif %}</td>
                                     <td>
                                         <a href = "{{ path('block_show', {'id': record.id}) }}" class="btn btn-labeled btn-success">
                                             <span class="btn-label"><i class="glyphicon glyphicon-share"></i></span>

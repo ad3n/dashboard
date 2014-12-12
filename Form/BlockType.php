@@ -34,6 +34,11 @@ class BlockType extends AbstractType
                 'label' => 'form.label.block',
                 'choice_list' => new ChoiceList($this->container->getParameter('app.block'), $this->container->getParameter('app.block'))
             ))
+            ->add('status', 'checkbox', array(
+                'label' => 'form.label.status',
+                'required' => false,
+                'data' => true
+            ))
             ->add('chart', 'entity', array(
                 'label' => 'form.label.chart',
                 'class' => 'AppBundle\\Entity\\Chart',

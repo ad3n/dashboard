@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serialize;
 use Ihsan\MalesBundle\Entity\AbstractEntity;
+use AppBundle\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\BlockRepository")
@@ -46,6 +47,14 @@ class Block extends AbstractEntity
      * @Serialize\Expose
      **/
     protected $chart;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="block")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *
+     * @Serialize\Expose
+     **/
+    protected $user;
 
     /**
      * @ORM\Column(name="status", type="boolean")
@@ -145,5 +154,28 @@ class Block extends AbstractEntity
     public function getChart()
     {
         return $this->chart;
+    }
+
+    /**
+     * Set user
+     *
+     * @param User $user
+     * @return Block
+     */
+    public function setUser(User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -26,9 +26,13 @@
                                 <label class="label">{{ 'form.label.chart' | trans }}</label>
                                 <label class="input">{{ data.chart }}</label>
                             </section>
-                            <section class="col col-4">
+                            <section class="col col-2">
                                 <label class="label">{{ 'form.label.chart_type' | trans }}</label>
                                 <label class="input">{{ data.chart.type }}</label>
+                            </section>
+                            <section class="col col-2">
+                                <label class="label">{{ 'form.label.status' | trans }}</label>
+                                <label class="input">{% if (data.status) %} {{ 'AKTIF' }} {% else %} {{ 'TIDAK AKTIF' }} {% endif %}</label>
                             </section>
                         </div>
                     </fieldset>
