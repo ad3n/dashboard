@@ -40,7 +40,7 @@ class Chart extends AbstractEntity
     protected $name;
 
     /**
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      *
      * @Serialize\Expose
      * @Assert\NotBlank
@@ -56,6 +56,15 @@ class Chart extends AbstractEntity
      * @Assert\Length(min="2", minMessage="form.error.min", max="17", maxMessage="form.error.max")
      **/
     protected $chartType;
+
+    /**
+     * @ORM\Column(name="query", type="string", length=255)
+     *
+     * @Serialize\Expose
+     * @Assert\NotBlank
+     * @Assert\Length(min="2", minMessage="form.error.min", max="255", maxMessage="form.error.max")
+     **/
+    protected $query;
 
     /**
      * @ORM\OneToMany(targetEntity="Block", mappedBy="chart")
@@ -124,12 +133,35 @@ class Chart extends AbstractEntity
     }
 
     /**
+     * Set query
+     *
+     * @param string $query
+     * @return Chart
+     */
+    public function setQuery($query)
+    {
+        $this->query = $query;
+
+        return $this;
+    }
+
+    /**
+     * Get query
+     *
+     * @return string
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
      * Set chartType
      *
      * @param string $chartType
      * @return Chart
      */
-    public function setChartType($chartType)
+    public function setType($chartType)
     {
         $this->chartType = $chartType;
 
@@ -141,7 +173,7 @@ class Chart extends AbstractEntity
      *
      * @return string 
      */
-    public function getChartType()
+    public function getType()
     {
         return $this->chartType;
     }

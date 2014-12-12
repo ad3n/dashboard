@@ -14,13 +14,10 @@ class QueryMapper
 
     private $repositoryMethod;
 
-    private $options;
-
-    public function __construct($entityClass, $repositoryMethod, array $options = array())
+    public function __construct($entityClass, $repositoryMethod)
     {
         $this->entityClass = $entityClass;
         $this->repositoryMethod = $repositoryMethod;
-        $this->options = $options;
     }
 
     public function getEntityClass()
@@ -31,10 +28,5 @@ class QueryMapper
     public function getRepositoryMethod()
     {
         return $this->repositoryMethod;
-    }
-
-    public function getOptions()
-    {
-        return $this->options;
     }
 } 
