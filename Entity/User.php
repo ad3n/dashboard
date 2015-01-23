@@ -39,11 +39,6 @@ class User extends BaseUser implements EntityInterface
      **/
     protected $authenticationToken;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Block", mappedBy="user")
-     **/
-    protected $block;
-
     public function __construct()
     {
         parent::__construct();
@@ -108,10 +103,5 @@ class User extends BaseUser implements EntityInterface
     public function removeBlock(\AppBundle\Entity\Block $block)
     {
         $this->block->removeElement($block);
-    }
-
-    public function getBlock()
-    {
-        return $this->block;
     }
 }

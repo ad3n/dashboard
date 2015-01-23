@@ -6,10 +6,12 @@
  *
  * @author : Muhamad Surya Iksanudin
  **/
-namespace AppBundle\Entity;
+namespace AppBundle\Chart\Kepesertaan;
 
-use Doctrine\ORM\EntityRepository;
-
-class BlockRepository extends EntityRepository
+class GrafikPertumbuhanPeserta
 {
+    public function grafikPertumbuhanPesertaPbi()
+    {
+
+    }
 }

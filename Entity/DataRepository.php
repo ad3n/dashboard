@@ -12,108 +12,91 @@ use Doctrine\ORM\EntityRepository;
 
 class DataRepository extends EntityRepository
 {
-    public function findByIndikator($indikator)
+    public function findByIndikatorKelurahanTahun($indikator, $propinsi, $kabupaten, $kecamatan, $kelurahan, $tahun)
     {
-        return $this->findBy(array('indikator' => $indikator));
+        return $this->findBy(array(
+            'indikator' => $indikator,
+            'propinsi' => $propinsi,
+            'kabupaten' => $kabupaten,
+            'kecamatan' => $kecamatan,
+            'kelurahan' => $kelurahan,
+            'tahun' => $tahun,
+        ));
     }
 
-    public function findByBulan($bulan, $tahun)
+    public function findByIndikatorKelurahanBulan($indikator, $propinsi, $kabupaten, $kecamatan, $kelurahan, $tahun, $bulan)
     {
-        return $this->findBy(array('bulan' => $bulan, 'tahun' => $tahun));
+        return $this->findBy(array(
+            'indikator' => $indikator,
+            'propinsi' => $propinsi,
+            'kabupaten' => $kabupaten,
+            'kecamatan' => $kecamatan,
+            'kelurahan' => $kelurahan,
+            'tahun' => $tahun,
+            'bulan' => $bulan,
+        ));
     }
 
-    public function findByTahun($tahun)
+    public function findByIndikatorKecamatanTahun($indikator, $propinsi, $kabupaten, $kecamatan, $tahun)
     {
-        return $this->findBy(array('tahun' => $tahun));
+        return $this->findBy(array(
+            'indikator' => $indikator,
+            'propinsi' => $propinsi,
+            'kabupaten' => $kabupaten,
+            'kecamatan' => $kecamatan,
+            'tahun' => $tahun,
+        ));
     }
 
-    public function findByKelurahan($kelurahan)
+    public function findByIndikatorKecamatanBulan($indikator, $propinsi, $kabupaten, $kecamatan, $tahun, $bulan)
     {
-        return $this->findBy(array('kelurahan' => $kelurahan));
+        return $this->findBy(array(
+            'indikator' => $indikator,
+            'propinsi' => $propinsi,
+            'kabupaten' => $kabupaten,
+            'kecamatan' => $kecamatan,
+            'tahun' => $tahun,
+            'bulan' => $bulan,
+        ));
     }
 
-    public function findByKecamatan($kecamatan)
+    public function findByIndikatorKabupatenTahun($indikator, $propinsi, $kabupaten, $tahun)
     {
-        return $this->findBy(array('kecamatan' => $kecamatan));
+        return $this->findBy(array(
+            'indikator' => $indikator,
+            'propinsi' => $propinsi,
+            'kabupaten' => $kabupaten,
+            'tahun' => $tahun,
+        ));
     }
 
-    public function findByKabupaten($kabupaten)
+    public function findByIndikatorKabupatenBulan($indikator, $propinsi, $kabupaten, $tahun, $bulan)
     {
-        return $this->findBy(array('kabupaten' => $kabupaten));
+        return $this->findBy(array(
+            'indikator' => $indikator,
+            'propinsi' => $propinsi,
+            'kabupaten' => $kabupaten,
+            'tahun' => $tahun,
+            'bulan' => $bulan,
+        ));
     }
 
-    public function findByPropinsi($propinsi)
+    public function findByIndikatorPropinsiTahun($indikator, $propinsi, $tahun)
     {
-        return $this->findBy(array('propinsi' => $propinsi));
+        return $this->findBy(array(
+            'indikator' => $indikator,
+            'propinsi' => $propinsi,
+            'tahun' => $tahun,
+        ));
     }
 
-    public function findByIndikatorBulan($indikator, $bulan, $tahun)
+    public function findByIndikatorPropinsiBulan($indikator, $propinsi, $tahun, $bulan)
     {
-        return $this->findBy(array('indikator' => $indikator, 'bulan' => $bulan, 'tahun' => $tahun));
-    }
-
-    public function findByIndikatorTahun($indikator, $tahun)
-    {
-        return $this->findBy(array('indikator' => $indikator, 'tahun' => $tahun));
-    }
-
-    public function findByIndikatorKelurahan($indikator, $kelurahan)
-    {
-        return $this->findBy(array('indikator' => $indikator, 'kelurahan' => $kelurahan));
-    }
-
-    public function findByIndikatorKecamatan($indikator, $kecamatan)
-    {
-        return $this->findBy(array('indikator' => $indikator, 'kecamatan' => $kecamatan));
-    }
-
-    public function findByIndikatorKebupaten($indikator, $kabupaten)
-    {
-        return $this->findBy(array('indikator' => $indikator, 'kabupaten' => $kabupaten));
-    }
-
-    public function findByIndikatorPropinsi($indikator, $propinsi)
-    {
-        return $this->findBy(array('indikator' => $indikator, 'propinsi' => $propinsi));
-    }
-
-    public function findByBulanKelurahan($bulan, $tahun, $kelurahan)
-    {
-        return $this->findBy(array('bulan' => $bulan, 'tahun' => $tahun, 'kelurahan' => $kelurahan));
-    }
-
-    public function findByBulanKecamatan($bulan, $tahun, $kecamatan)
-    {
-        return $this->findBy(array('bulan' => $bulan, 'tahun' => $tahun, 'kecamatan' => $kecamatan));
-    }
-
-    public function findByBulanKabupaten($bulan, $tahun, $kabupaten)
-    {
-        return $this->findBy(array('bulan' => $bulan, 'tahun' => $tahun, 'kabupaten' => $kabupaten));
-    }
-
-    public function findByBulanPropinsi($bulan, $tahun, $propinsi)
-    {
-        return $this->findBy(array('bulan' => $bulan, 'tahun' => $tahun, 'propinsi' => $propinsi));
-    }
-
-    public function findByTahunKelurahan($tahun, $kelurahan)
-    {
-        return $this->findBy(array('tahun' => $tahun, 'kelurahan' => $kelurahan));
-    }
-
-    public function findByTahunKecamatan($tahun, $kecamatan)
-    {
-        return $this->findBy(array('tahun' => $tahun, 'kecamatan' => $kecamatan));
-    }
-
-    public function findByTahunKabupaten($tahun, $kabupaten)
-    {
-        return $this->findBy(array('tahun' => $tahun, 'kabupaten' => $kabupaten));
-    }
-
-    public function findByTahunPropinsi($tahun, $propinsi)
-    {
-        return $this->findBy(array('tahun' => $tahun, 'propinsi' => $propinsi));
+        return $this->findBy(array(
+            'indikator' => $indikator,
+            'propinsi' => $propinsi,
+            'tahun' => $tahun,
+            'bulan' => $bulan,
+        ));
     }
 }
