@@ -10,7 +10,7 @@ namespace AppBundle\Event\Listener;
 
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Util\Serializer;
+use Ihsan\MalesBundle\Serializer\Serializer;
 
 class XmlHttpRequestEventListener
 {

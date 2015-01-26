@@ -1,181 +1,69 @@
 {% extends 'AppBundle:Layout:main.html.twig' %}
 
 {% block content %}
-<div class="row">
-      <div class="col-sm-8">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-            Cell Title
-          </div>
-          <div id="block1" style="height: 440px;" class="chart-stage">
-          </div>
-          <div class="chart-notes">
-            Notes about this chart
-          </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="chart-wrapper">
+                <div id="block1" class="chart-stage"></div>
+            </div>
         </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-            Cell Title
-          </div>
-          <div class="chart-stage">
-            <img data-src="holder.js/100%x440/white/text:#block2">
-          </div>
-          <div class="chart-notes">
-            Notes about this chart
-          </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="chart-wrapper">
+                <div id="block2" class="chart-stage"></div>
+            </div>
         </div>
-      </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="chart-wrapper">
+                <div id="block3" class="chart-stage"></div>
+            </div>
+        </div>
     </div>
 
     <div class="row">
-      <div class="col-sm-6 col-md-6">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-            Cell Title
-          </div>
-          <div class="chart-stage">
-            <img data-src="holder.js/100%x330/white/text:#block3">
-          </div>
-          <div class="chart-notes">
-            Notes about this chart
-          </div>
+        <div class="col-lg-12">
+            <div class="chart-wrapper">
+                <div id="block4" class="chart-stage"></div>
+            </div>
         </div>
-      </div>
-      <div class="col-sm-6 col-md-6">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-            Cell Title
-          </div>
-          <div class="chart-stage">
-            <img data-src="holder.js/100%x330/white/text:#block4">
-          </div>
-          <div class="chart-notes">
-            Notes about this chart
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="row">
-      <div class="col-sm-6 col-md-4">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-            Cell Title
-          </div>
-          <div class="chart-stage">
-            <img data-src="holder.js/100%x270/white/text:#block5">
-          </div>
-          <div class="chart-notes">
-            Notes about this chart
-          </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="chart-wrapper">
+                <div id="block5" class="chart-stage"></div>
+            </div>
         </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-            Cell Title
-          </div>
-          <div class="chart-stage">
-            <img data-src="holder.js/100%x270/white/text:#block6">
-          </div>
-          <div class="chart-notes">
-            Notes about this chart
-          </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="chart-wrapper">
+                <div id="block6" class="chart-stage"></div>
+            </div>
         </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-            Cell Title
-          </div>
-          <div class="chart-stage">
-            <img data-src="holder.js/100%x270/white/text:#block7">
-          </div>
-          <div class="chart-notes">
-            Notes about this chart
-          </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="chart-wrapper">
+                <div id="block7" class="chart-stage"></div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 <script type="text/javascript">
 jQuery(document).ready(function () {
-    var option = {
-        title : {
-            text: 'Peserta vs Iuran',
-            subtext: 'Grafik Peserta vs Iuran'
-        },
-        tooltip : {
-            trigger: 'axis'
-        },
-        legend: {
-            data:['Perserta','Iuran']
-        },
-        toolbox: {
-            show : true,
-            feature : {
-                mark : {show: true},
-                dataView : {show: true, readOnly: false},
-                magicType : {show: true, type: ['line', 'bar']},
-                restore : {show: true},
-                saveAsImage : {show: true}
-            }
-        },
-        calculable : true,
-        xAxis : [
-            {
-                type : 'category',
-                boundaryGap : false,
-                data : ['Januari','Februari','Maret','April','Mei','Juni','Juli']
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value',
-                axisLabel : {
-                    formatter: '{value}'
-                }
-            }
-        ],
-        series : [
-            {
-                name:'Perserta',
-                type:'line',
-                data:[11, 11, 15, 13, 12, 13, 10],
-                markPoint : {
-                    data : [
-                        {type : 'max', name: 'Tertinggi'},
-                        {type : 'min', name: 'Terendah'}
-                    ]
-                },
-                markLine : {
-                    data : [
-                        {type : 'average', name: 'Rata-Rata'}
-                    ]
-                }
-            },
-            {
-                name:'Iuran',
-                type:'line',
-                data:[1, -2, 2, 5, 3, 2, 0],
-                markPoint : {
-                    data : [
-                        {name : 'Kacau', value : -2, xAxis: 1, yAxis: -2}
-                    ]
-                },
-                markLine : {
-                    data : [
-                        {type : 'average', name : 'Rata-Rata'}
-                    ]
-                }
-            }
-        ]
-    };
+    var global = {{ global | raw }};
+    var propinsiPerTahun = {{ propinsi_pertahun | raw }};
 
-    var myChart = echarts.init(document.getElementById('block1'));
-    myChart.setOption(option);
+    Chart.request(function (data) {
+        Chart.createGaugeChart(data, '#block1', data['indikator']['name']);
+    }, 'PS01', 'nasional');
+
+    Chart.request(function (data) {
+        Chart.createGaugeChart(data, '#block2', data['indikator']['name']);
+    }, 'PS02', 'nasional');
+
+    Chart.request(function (data) {
+        Chart.createGaugeChart(data, '#block3', data['indikator']['name']);
+    }, 'PS03', 'nasional');
+
+    Chart.request(function (data) {
+        Chart.createColumnChart(data, '#block4', data['indikator']['name']);
+    }, 'PS07', 'nasional');
 });
 </script>
 {% endblock %}

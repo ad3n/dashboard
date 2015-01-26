@@ -8,8 +8,10 @@
  **/
 namespace AppBundle\Chart;
 
+use AppBundle\Util\BulanIndonesia;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityNotFoundException;
+use Symfony\Component\Validator\Exception\OutOfBoundsException;
 
 class DataCreator
 {
@@ -20,24 +22,42 @@ class DataCreator
         $this->objectManager = $manager;
     }
 
-    /**
-     * @param string $kodeIndikator
-     * @param string $propinsi
-     * @param string $kabupaten
-     * @param string $kecamatan
-     * @param string $kelurahan
-     * @param string $bulan
-     * @param string $tahun
-     * @throws EntityNotFoundException
-     */
+    public function create(array $parameters, $type = 'specific')
+    {
+        if (! array_key_exists('tahun', $parameters)) {
+            $parameters['tahun'] = date('Y');
+        }
+
+        switch ($type) {
+            case 'specific':
+                if (! array_key_exists('indikator', $parameters) || ! array_key_exists('propinsi', $parameters)) {
+                    throw new OutOfBoundsException(sprintf('indikator dan propinsi diperlukan.'));
+                }
+
+                return $this->createSpecificData(
+                    $parameters['indikator'],
+                    $parameters['propinsi'],
+                    array_key_exists('kabupaten', $parameters) ? $parameters['kabupaten'] : null,
+                    array_key_exists('kecamatan', $parameters) ? $parameters['kecamatan'] : null,
+                    array_key_exists('kelurahan', $parameters) ? $parameters['kelurahan'] : null,
+                    $parameters['tahun'],
+                    array_key_exists('bulan', $parameters) ? $parameters['bulan'] : null
+                );
+                break;
+            case 'global':
+                return $this->createGlobalData(
+                    $parameters['indikator'],
+                    $parameters['tahun'],
+                    array_key_exists('bulan', $parameters) ? $parameters['bulan'] : null
+                );
+                break;
+        }
+    }
+
     private function createSpecificData($kodeIndikator, $propinsi, $kabupaten = null, $kecamatan = null, $kelurahan = null, $tahun = null, $bulan = null)
     {
-        $indikator = $this->objectManager->getRepository('AppBundle:Indikator')->findOneBy(array('code' => $kodeIndikator));
+        $this->isExistOrExceptionIndikator($kodeIndikator);
         $repository = $this->objectManager->getRepository('AppBundle:Data');
-
-        if (! $indikator) {
-            throw new EntityNotFoundException(sprintf('indikator dengan kode %s tidak ditemukan', $kodeIndikator));
-        }
 
         if (null === $tahun) {
            $tahun = date('Y');
@@ -45,14 +65,22 @@ class DataCreator
 
         if (! $kabupaten) {
             if (! $bulan) {
-                return $repository->findByIndikatorPropinsiTahun($kodeIndikator, $propinsi, (int) $tahun);
+                $results = $repository->findByIndikatorPropinsiTahun($kodeIndikator, $propinsi, (int) $tahun);
+                $data = array();
+
+                foreach ($results as $key => $result) {
+                    $data[BulanIndonesia::convertToText($result->getBulan())] = $result->getValue();
+                }
+
+                return $data;
             } else {
-                return $repository->findByIndikatorPropinsiBulan($kodeIndikator, $propinsi, (int) $tahun, (int) $bulan);
+                $data[BulanIndonesia::convertToText((int) $bulan)] = $repository->findByIndikatorPropinsiBulan($kodeIndikator, $propinsi, (int) $tahun, (int) $bulan);
+
+                return $data;
             }
         }
 
         if (! $kecamatan) {
-
             if (! $kabupaten) {
                 throw new \BadMethodCallException('kode kabupaten diperlukan.');
             }
@@ -65,7 +93,6 @@ class DataCreator
         }
 
         if (! $kelurahan) {
-
             if (! $kabupaten || ! $kecamatan) {
                 throw new \BadMethodCallException('kode kabupaten dan kode kecamatan diperlukan.');
             }
@@ -84,8 +111,37 @@ class DataCreator
         }
     }
 
-    private function createGlobalData($dariTahun, $sampaiTahun, $kodeIndikator, $propinsi, $kabupaten = null, $kecamatan = null, $kelurahan = null)
+    private function createGlobalData($kodeIndikator, $tahun, $bulan = null)
     {
+        $this->isExistOrExceptionIndikator($kodeIndikator);
 
+        $repository = $this->objectManager->getRepository('AppBundle:Data');
+
+        if (! $bulan) {
+            $results = $repository->findByIndikatorTahun($kodeIndikator, (int) $tahun);
+            $data = array();
+
+            foreach ($results as $key => $result) {
+                $data[BulanIndonesia::convertToText($result->getBulan())] = $result->getValue();
+            }
+
+            return $data;
+
+        } else {
+            $data[BulanIndonesia::convertToText((int) $bulan)] = $repository->findByIndikatorBulan($kodeIndikator, (int) $tahun, (int) $bulan);
+
+            return $data;
+        }
+    }
+
+    private function isExistOrExceptionIndikator($kodeIndikator)
+    {
+        $indikator = $this->objectManager->getRepository('AppBundle:Indikator')->findOneBy(array('code' => $kodeIndikator));
+
+        if (! $indikator) {
+            throw new EntityNotFoundException(sprintf('indikator dengan kode %s tidak ditemukan', $kodeIndikator));
+        }
+
+        return true;
     }
 }

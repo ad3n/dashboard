@@ -38,6 +38,16 @@ class BulanIndonesia
         }
     }
 
+    public static function allText()
+    {
+        return array_values(self::$BULAN);
+    }
+
+    public static function allNumeric()
+    {
+        return array_keys(self::$BULAN);
+    }
+
     public static function convertToNumber($text)
     {
         return array_search($text, self::$BULAN);

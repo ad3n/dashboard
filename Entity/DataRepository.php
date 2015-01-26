@@ -99,4 +99,111 @@ class DataRepository extends EntityRepository
             'bulan' => $bulan,
         ));
     }
+
+    public function findByIndikatorTahun($indikator, $tahun)
+    {
+        return $this->findBy(array(
+            'indikator' => $indikator,
+            'tahun' => $tahun,
+        ));
+    }
+
+    public function findByIndikatorBulan($indikator, $tahun, $bulan)
+    {
+        return $this->findBy(array(
+            'indikator' => $indikator,
+            'tahun' => $tahun,
+            'bulan' => $bulan,
+        ));
+    }
+
+    public function findByIndikatorKelurahanSummary($dariTahun, $sampaiTahun, $indikator, $propinsi, $kabupaten, $kecamatan, $kelurahan)
+    {
+        $queryBuilder = $this->createQueryBuilder('d');
+        $queryBuilder->andWhere('d.indikator = :indikator');
+        $queryBuilder->andWhere('d.propinsi = :propinsi');
+        $queryBuilder->andWhere('d.kabupaten = :kabupaten');
+        $queryBuilder->andWhere('d.kecamatan = :kecamatan');
+        $queryBuilder->andWhere('d.kelurahan = :kelurahan');
+        $queryBuilder->andWhere('d.tahun BETWEEN :from AND :to');
+        $queryBuilder->setParameters(array(
+            'indikator' => $indikator,
+            'propinsi' => $propinsi,
+            'kabupaten' => $kabupaten,
+            'kecamatan' => $kecamatan,
+            'kelurahan' => $kelurahan,
+            'from' => $dariTahun,
+            'to' => $sampaiTahun,
+        ));
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function findByIndikatorKecamatanSummary($dariTahun, $sampaiTahun, $indikator, $propinsi, $kabupaten, $kecamatan)
+    {
+        $queryBuilder = $this->createQueryBuilder('d');
+        $queryBuilder->andWhere('d.indikator = :indikator');
+        $queryBuilder->andWhere('d.propinsi = :propinsi');
+        $queryBuilder->andWhere('d.kabupaten = :kabupaten');
+        $queryBuilder->andWhere('d.kecamatan = :kecamatan');
+        $queryBuilder->andWhere('d.tahun BETWEEN :from AND :to');
+        $queryBuilder->setParameters(array(
+            'indikator' => $indikator,
+            'propinsi' => $propinsi,
+            'kabupaten' => $kabupaten,
+            'kecamatan' => $kecamatan,
+            'from' => $dariTahun,
+            'to' => $sampaiTahun,
+        ));
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function findByIndikatorKabupatenSummary($dariTahun, $sampaiTahun, $indikator, $propinsi, $kabupaten)
+    {
+        $queryBuilder = $this->createQueryBuilder('d');
+        $queryBuilder->andWhere('d.indikator = :indikator');
+        $queryBuilder->andWhere('d.propinsi = :propinsi');
+        $queryBuilder->andWhere('d.kabupaten = :kabupaten');
+        $queryBuilder->andWhere('d.tahun BETWEEN :from AND :to');
+        $queryBuilder->setParameters(array(
+            'indikator' => $indikator,
+            'propinsi' => $propinsi,
+            'kabupaten' => $kabupaten,
+            'from' => $dariTahun,
+            'to' => $sampaiTahun,
+        ));
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function findByIndikatorPropinsiSummary($dariTahun, $sampaiTahun, $indikator, $propinsi)
+    {
+        $queryBuilder = $this->createQueryBuilder('d');
+        $queryBuilder->andWhere('d.indikator = :indikator');
+        $queryBuilder->andWhere('d.propinsi = :propinsi');
+        $queryBuilder->andWhere('d.tahun BETWEEN :from AND :to');
+        $queryBuilder->setParameters(array(
+            'indikator' => $indikator,
+            'propinsi' => $propinsi,
+            'from' => $dariTahun,
+            'to' => $sampaiTahun,
+        ));
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function findByIndikatorSummary($dariTahun, $sampaiTahun, $indikator)
+    {
+        $queryBuilder = $this->createQueryBuilder('d');
+        $queryBuilder->andWhere('d.indikator = :indikator');
+        $queryBuilder->andWhere('d.tahun BETWEEN :from AND :to');
+        $queryBuilder->setParameters(array(
+            'indikator' => $indikator,
+            'from' => $dariTahun,
+            'to' => $sampaiTahun,
+        ));
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

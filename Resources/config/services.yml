@@ -9,16 +9,16 @@ services:
     arguments:
       - @app.security.encoder.generator
 
-  app.util.serializer:
-    class: AppBundle\Util\Serializer
+  app.chart.data_creator:
+    class: AppBundle\Chart\DataCreator
     lazy: true
     arguments:
-      - @jms_serializer
+      - @doctrine.orm.entity_manager
 
   app.event.listener.ajax_exception_listener:
     class: AppBundle\Event\Listener\XmlHttpRequestEventListener
     lazy: true
-    arguments: [@app.util.serializer]
+    arguments: [@males.serializer]
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 

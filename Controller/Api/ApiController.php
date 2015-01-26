@@ -14,14 +14,14 @@ class ApiController extends Controller
 {
     protected function serialize($data, $groups = array(), $format = 'json')
     {
-        $serializer = $this->container->get('app.util.serializer');
+        $serializer = $this->container->get('males.serializer');
 
         return $serializer->serialize($data, $groups, $format);
     }
 
     protected function deserialize($data, $type, $format = 'json')
     {
-        $serializer = $this->container->get('app.util.serializer');
+        $serializer = $this->container->get('males.serializer');
 
         return $serializer->serialize($data, $type, $format);
     }

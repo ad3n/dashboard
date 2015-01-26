@@ -6,12 +6,9 @@
  *
  * @author : Muhamad Surya Iksanudin
  **/
-namespace AppBundle\Chart\Kepesertaan;
+namespace AppBundle\Chart;
 
-class GrafikPertumbuhanPeserta
+abstract class AbstractGrafik
 {
-    public function grafikPertumbuhanPesertaPbi()
-    {
-
-    }
+    const TAHUN_INISIALISASI = 2014;
 }

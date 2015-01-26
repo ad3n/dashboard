@@ -65,9 +65,40 @@ class Indikator extends AbstractEntity
      **/
     protected $name;
 
+    /**
+     * @ORM\Column(name="merah", type="smallint")
+     *
+     * @Serialize\Expose
+     * @Assert\NotBlank
+     * @Assert\Length(max="2", maxMessage="form.error.max")
+     **/
+    protected $indikatorMerah;
+
+    /**
+     * @ORM\Column(name="kuning", type="smallint")
+     *
+     * @Serialize\Expose
+     * @Assert\NotBlank
+     * @Assert\Length(max="2", maxMessage="form.error.max")
+     **/
+    protected $indikatorKuning;
+
+    /**
+     * @ORM\Column(name="hijau", type="smallint")
+     *
+     * @Serialize\Expose
+     * @Assert\NotBlank
+     * @Assert\Length(max="2", maxMessage="form.error.max")
+     **/
+    protected $indikatorHijau;
+
     public function __construct()
     {
         $this->child = new ArrayCollection();
+
+        $this->indikatorMerah = 0;
+        $this->indikatorKuning = 40;
+        $this->indikatorHijau = 70;
     }
 
     public function __toString()
@@ -183,5 +214,74 @@ class Indikator extends AbstractEntity
     public function removeChild(Indikator $child)
     {
         $this->child->removeElement($child);
+    }
+
+    /**
+     * Set indikatorMerah
+     *
+     * @param integer $indikatorMerah
+     * @return Indikator
+     */
+    public function setIndikatorMerah($indikatorMerah)
+    {
+        $this->indikatorMerah = $indikatorMerah;
+
+        return $this;
+    }
+
+    /**
+     * Get indikatorMerah
+     *
+     * @return integer 
+     */
+    public function getIndikatorMerah()
+    {
+        return $this->indikatorMerah;
+    }
+
+    /**
+     * Set indikatorKuning
+     *
+     * @param integer $indikatorKuning
+     * @return Indikator
+     */
+    public function setIndikatorKuning($indikatorKuning)
+    {
+        $this->indikatorKuning = $indikatorKuning;
+
+        return $this;
+    }
+
+    /**
+     * Get indikatorKuning
+     *
+     * @return integer 
+     */
+    public function getIndikatorKuning()
+    {
+        return $this->indikatorKuning;
+    }
+
+    /**
+     * Set indikatorHijau
+     *
+     * @param integer $indikatorHijau
+     * @return Indikator
+     */
+    public function setIndikatorHijau($indikatorHijau)
+    {
+        $this->indikatorHijau = $indikatorHijau;
+
+        return $this;
+    }
+
+    /**
+     * Get indikatorHijau
+     *
+     * @return integer 
+     */
+    public function getIndikatorHijau()
+    {
+        return $this->indikatorHijau;
     }
 }
