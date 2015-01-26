@@ -50,7 +50,7 @@ jQuery(document).ready(function () {
     Chart.requestSingleChart(function (data) {
         Chart.createGaugeChart(data, '#block1', data['indikator']['name'], {
             click: function (e) {
-                alert('Under Constructions.');
+                Chart.modalHelper.pleaseWait();
             }
         });
     }, 'PS01', 'nasional');
