@@ -44,26 +44,64 @@
             </div>
         </div>
     </div>
+<div id="progressHelper"></div>
 <script type="text/javascript">
 jQuery(document).ready(function () {
-    var global = {{ global | raw }};
-    var propinsiPerTahun = {{ propinsi_pertahun | raw }};
-
-    Chart.request(function (data) {
-        Chart.createGaugeChart(data, '#block1', data['indikator']['name']);
+    Chart.requestSingleChart(function (data) {
+        Chart.createGaugeChart(data, '#block1', data['indikator']['name'], {
+            click: function (e) {
+                alert('Under Constructions.');
+            }
+        });
     }, 'PS01', 'nasional');
 
-    Chart.request(function (data) {
-        Chart.createGaugeChart(data, '#block2', data['indikator']['name']);
+    Chart.requestSingleChart(function (data) {
+        Chart.createGaugeChart(data, '#block2', data['indikator']['name'], {
+            click: function (e) {
+                alert('Under Constructions.');
+            }
+        });
     }, 'PS02', 'nasional');
 
-    Chart.request(function (data) {
-        Chart.createGaugeChart(data, '#block3', data['indikator']['name']);
+    Chart.requestSingleChart(function (data) {
+        Chart.createGaugeChart(data, '#block3', data['indikator']['name'], {
+            click: function (e) {
+                alert('Under Constructions.');
+            }
+        });
     }, 'PS03', 'nasional');
 
-    Chart.request(function (data) {
-        Chart.createColumnChart(data, '#block4', data['indikator']['name']);
-    }, 'PS07', 'nasional');
+    Chart.requestSingleChart(function (data) {
+        Chart.createColumnChart({
+            click: function (e) {
+                alert('Under Constructions.');
+            }
+        }, data, '#block4', data['indikator']['name']);
+    }, 'PS01', 'propinsi', 1);
+
+    Chart.requestSingleChart(function (data) {
+        Chart.createPieChart(data, '#block5', data['indikator']['name'], {
+            click: function (e) {
+                alert('Under Constructions.');
+            }
+        });
+    }, 'PS01', 'propinsi', 1);
+
+    Chart.requestSingleChart(function (data) {
+        Chart.createPieChart(data, '#block6', data['indikator']['name'], {
+            click: function (e) {
+                alert('Under Constructions.');
+            }
+        });
+    }, 'PS01', 'propinsi', 1);
+
+    Chart.requestSingleChart(function (data) {
+        Chart.createPieChart(data, '#block7', data['indikator']['name'], {
+            click: function (e) {
+                alert('Under Constructions.');
+            }
+        });
+    }, 'PS01', 'propinsi', 1);
 });
 </script>
 {% endblock %}

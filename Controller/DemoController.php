@@ -19,14 +19,7 @@ class DemoController extends Controller
      **/
     public function dashboardAction()
     {
-        $grafikPertumbuhanPesertaPbi = new GrafikPertumbuhanPesertaPbi($this->container->get('app.chart.data_creator'), $this->container->get('males.serializer'));
-
-        $data = array(
-            'global' => $grafikPertumbuhanPesertaPbi->createGrafikGlobal(),
-            'propinsi_pertahun' => $grafikPertumbuhanPesertaPbi->createPropinsiPertahun(1, 2014),
-        );
-
-        return $this->render('AppBundle:Demo:main.html.twig', $data);
+        return $this->render('AppBundle:Demo:main.html.twig');
     }
 
     /**
