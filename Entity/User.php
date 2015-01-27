@@ -92,16 +92,4 @@ class User extends BaseUser implements EntityInterface
     {
         return $this->fullName;
     }
-
-    public function addBlock(\AppBundle\Entity\Block $block)
-    {
-        $this->block[] = $block;
-
-        return $this;
-    }
-
-    public function removeBlock(\AppBundle\Entity\Block $block)
-    {
-        $this->block->removeElement($block);
-    }
 }
