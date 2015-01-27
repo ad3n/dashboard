@@ -282,7 +282,7 @@ Chart.createPieChart = function (data, seletor, title, handler) {
         type: 'pie',
         name: 'Total',
         data: output
-    }, seletor, title, handler);
+    }, seletor, title + temp[0]['name'], handler);
 };
 
 Chart.processDataPerTahun = function (data, type) {
