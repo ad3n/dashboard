@@ -5,9 +5,6 @@ services:
   app.entity.user:
     class: AppBundle\Entity\User
 
-  app.entity.wilayah:
-    class: AppBundle\Entity\Wilayah
-
   app.entity.propinsi:
     class: AppBundle\Entity\Propinsi
 
