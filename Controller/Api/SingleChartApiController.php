@@ -20,18 +20,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class SingleChartApiController extends ApiController
 {
     /**
-     * @Route("/get/{indikator}/{scope}/{kode}/{dari}/{sampai}", name="api_chart", defaults={"scope" = "nasional", "kode" = "0", "tahun" = "0", "bulan" = "0"})
+     * @Route("/get/{indikator}/{scope}/{kode}/{tahun}/{bulan}", name="api_chart", defaults={"scope" = "nasional", "kode" = "0", "tahun" = "0", "bulan" = "0"})
      * @Method("GET")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
      *
      * @param string $indikator
      * @param string $scope
      * @param string $kode
-     * @param string $dari
-     * @param string $sampai
+     * @param string $tahun
+     * @param string $bulan
      * @return Response
      */
-    public function getAction($indikator, $scope, $kode, $dari, $sampai)
+    public function getAction($indikator, $scope, $kode, $tahun, $bulan)
     {
         $indikator = strtoupper($indikator);
         $scope = strtolower($scope);
