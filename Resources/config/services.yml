@@ -76,3 +76,10 @@ imports:
   - { resource: form.yml }
   - { resource: entity.yml }
   - { resource: controller.yml }
+
+assetic:
+    filters:
+        yui_css:
+            jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.8.jar"
+        yui_js:
+            jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.8.jar"
