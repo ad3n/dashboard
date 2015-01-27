@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
- * @Route("/chart/single")
+ * @Route("/api/chart/single")
  **/
 class SingleChartApiController extends ApiController
 {
