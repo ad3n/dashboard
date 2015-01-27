@@ -42,7 +42,7 @@ class Kelurahan extends AbstractEntity
     protected $kecamatan;
 
     /**
-     * @ORM\Column(name="code", type="string", length=9, unique=true)
+     * @ORM\Column(name="code", type="string", length=11, unique=true)
      *
      * @Serialize\Expose
      * @Assert\NotBlank
