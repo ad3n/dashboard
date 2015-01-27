@@ -43,7 +43,7 @@ class Kecamatan extends AbstractEntity
     protected $kabupaten;
 
     /**
-     * @ORM\Column(name="code", type="string", length=6, unique=true)
+     * @ORM\Column(name="code", type="string", length=7, unique=true)
      *
      * @Serialize\Expose
      * @Assert\NotBlank
