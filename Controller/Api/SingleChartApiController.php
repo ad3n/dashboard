@@ -172,6 +172,14 @@ class SingleChartApiController extends ApiController
                 $criteria['bulan'] = $j;
                 $data = $this->getDoctrine()->getRepository('AppBundle:Data')->findBy($criteria, array('indikator' => 'ASC'));
 
+                if (! array_key_exists($criteria['tahun'], $output)) {
+                    $output[$criteria['tahun']] = array();
+                }
+
+                if (! array_key_exists($criteria['bulan'], $output[$criteria['tahun']])) {
+                    $output[$criteria['tahun']][$criteria['bulan']] = array();
+                }
+
                 foreach ($data as $key => $result) {
                     $output[$result->getTahun()][$result->getBulan()]['nominator'] = $result->getNominator();
                     $output[$result->getTahun()][$result->getBulan()]['denominator'] = $result->getDeNominator();

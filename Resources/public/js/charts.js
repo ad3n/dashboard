@@ -259,7 +259,9 @@ Chart.createGaugeChart = function (data, selector, title, handler) {
     jQuery.each(data['data'], function (key, value) {
         subtitle = 'TAHUN ' + key;
         jQuery.each(value, function (k, v) {
-            output = output + parseInt(v['value']);
+            if ('undefined' !== typeof v['value']) {
+                output = output + parseInt(v['value']);
+            }
 
             i++;
         });
@@ -325,7 +327,11 @@ Chart.processDataPerBulan = function (data, type) {
         output[i]['type'] = type;
 
         jQuery.each(value, function (k, v) {
-            data.push(parseInt(v['value']));
+            if ('undefined' !== typeof v['value']) {
+                data.push(parseInt(v['value']));
+            } else {
+                data.push(0);
+            }
         });
 
         output[i]['data'] = data;
@@ -499,7 +505,9 @@ Chart.processDataGlobal = function (data) {
         jQuery.each(value, function (k, v) {
             total = Object.keys(v).length;
             jQuery.each(v, function (y, z) {
-                data = data + parseInt(z['value']);
+                if ('undefined' !== typeof z['value']) {
+                    data = data + parseInt(z['value']);
+                }
             });
         });
 

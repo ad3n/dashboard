@@ -19,7 +19,7 @@ class DemoController extends Controller
      **/
     public function dashboardAction()
     {
-        return $this->render('AppBundle:Demo:main.html.twig');
+        return $this->render('AppBundle:Demo:main.html.twig', $this->createIndikatorMenu());
     }
 
     /**
@@ -46,8 +46,52 @@ class DemoController extends Controller
         return $this->render('AppBundle:Demo:report.html.twig');
     }
 
-    protected function getPropinsi()
+    private function getPropinsi()
     {
         return $this->getDoctrine()->getRepository('AppBundle:Wilayah')->findAllPropinsi();
+    }
+
+    private function createIndikatorMenu()
+    {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Indikator');
+        $kepesertaan = $repository->getChildIndikatorByParentCode('PS00');
+        $pelayanan = $repository->getChildIndikatorByParentCode('PL00');
+        $iuran = $repository->getChildIndikatorByParentCode('IU00');
+        $pembayaran = $repository->getChildIndikatorByParentCode('PP00');
+        $keuangan = $repository->getChildIndikatorByParentCode('KN00');
+        $kelembagaan = $repository->getChildIndikatorByParentCode('OK00');
+        $output = array();
+
+        $output['kepesertaan'] = '';
+        foreach ($kepesertaan as $key => $value) {
+            $output['kepesertaan'] .= sprintf('<li><a href="%s">%s</a></li>', '#', $value->getName());
+        }
+
+        $output['pelayanan'] = '';
+        foreach ($pelayanan as $key => $value) {
+            $output['pelayanan'] .= sprintf('<li><a href="%s">%s</a></li>', '#', $value->getName());
+        }
+
+        $output['iuran'] = '';
+        foreach ($iuran as $key => $value) {
+            $output['iuran'] .= sprintf('<li><a href="%s">%s</a></li>', '#', $value->getName());
+        }
+
+        $output['pembayaran'] = '';
+        foreach ($pembayaran as $key => $value) {
+            $output['pembayaran'] .= sprintf('<li><a href="%s">%s</a></li>', '#', $value->getName());
+        }
+
+        $output['keuangan'] = '';
+        foreach ($keuangan as $key => $value) {
+            $output['keuangan'] .= sprintf('<li><a href="%s">%s</a></li>', '#', $value->getName());
+        }
+
+        $output['kelembagaan'] = '';
+        foreach ($kelembagaan as $key => $value) {
+            $output['kelembagaan'] .= sprintf('<li><a href="%s">%s</a></li>', '#', $value->getName());
+        }
+
+        return $output;
     }
 }
