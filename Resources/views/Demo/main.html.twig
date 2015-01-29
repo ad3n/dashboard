@@ -64,7 +64,9 @@
             </div>
         </div>
     </div>
-<div id="progressHelper"></div>
+<div id="loader" style="display:none">
+    <img src="{{ asset('img/ajax-loader.gif') }}"/>
+</div>
 <script type="text/javascript">
 jQuery(document).ready(function () {
     Chart.requestSingleChart(function (data) {

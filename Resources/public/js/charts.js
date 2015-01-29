@@ -510,13 +510,12 @@ Chart.processDataGlobal = function (data) {
 };
 
 Chart.modalHelper = Chart.modalHelper || (function () {
-    var pleaseWaitDiv = jQuery('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="pleaseWaitDialog"><div class="modal-header"><h1 style="color:#eee;">Processing...</h1></div><div class="modal-body"><div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div></div></div></div>');
     return {
         pleaseWait: function() {
-            pleaseWaitDiv.modal();
+            jQuery('#loader').show();
         },
         done: function () {
-            pleaseWaitDiv.modal('hide');
+            jQuery('#loader').hide();
         }
     };
 })();
