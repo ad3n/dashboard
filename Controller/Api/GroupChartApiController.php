@@ -15,12 +15,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
- * @Route("/chart/single")
+ * @Route("/chart/group")
  **/
-class SingleChartApiController extends ApiController
+class GroupChartApiController extends ApiController
 {
     /**
-     * @Route("/get/{indikator}/{scope}/{kode}/{dari}/{sampai}", name="api_chart", defaults={"scope" = "nasional", "kode" = "0", "dari" = "0", "sampai" = "0"})
+     * @Route("/get/{indikator}/{scope}/{kode}/{dari}/{sampai}", name="api_chart_group", defaults={"scope" = "nasional", "kode" = "0", "dari" = "0", "sampai" = "0"})
      * @Method("GET")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
      *
@@ -33,7 +33,7 @@ class SingleChartApiController extends ApiController
      */
     public function getAction($indikator, $scope, $kode, $dari, $sampai)
     {
-        $indikator = strtoupper($indikator);
+        $indikator = substr($indikator, 0, 2);
         $scope = strtolower($scope);
         $criteria = array('indikator' => $indikator);
         $output = array();
@@ -55,7 +55,7 @@ class SingleChartApiController extends ApiController
             $criteria['sampai']['bulan'] = (int) $sampai[0];
         }
 
-        $output['indikator'] = $this->getIndikatorByCode($criteria['indikator']);
+        $output['indikator'] = $this->getIndikatorByCode(sprintf('%s00', $criteria['indikator']));
 
         switch ($scope) {
             case 'nasional':
@@ -170,12 +170,23 @@ class SingleChartApiController extends ApiController
             for ($j = $dariBulan; $j <= $sampaiBulan; $j++) {
                 $criteria['tahun'] = $i;
                 $criteria['bulan'] = $j;
-                $data = $this->getDoctrine()->getRepository('AppBundle:Data')->findBy($criteria, array('indikator' => 'ASC'));
 
-                foreach ($data as $key => $result) {
-                    $output[$result->getTahun()][$result->getBulan()]['nominator'] = $result->getNominator();
-                    $output[$result->getTahun()][$result->getBulan()]['denominator'] = $result->getDeNominator();
-                    $output[$result->getTahun()][$result->getBulan()]['value'] = $result->getValue();
+                $indikators = $this->getDoctrine()->getRepository('AppBundle:Indikator')->getChildIndikatorByParentCode($criteria['indikator']);
+
+                foreach ($indikators as $key => $value) {
+                    $criteria['indikator'] = $value->getCode();
+                    $data = $this->getDoctrine()->getRepository('AppBundle:Data')->findBy($criteria, array('indikator' => 'ASC'));
+                    $keyIndex = (int) substr($criteria['indikator'], -2);
+
+                    if (! array_key_exists($keyIndex, $output)) {
+                        $output[$keyIndex] = array();
+                    }
+
+                    foreach ($data as $key => $result) {
+                        $output[$keyIndex][$result->getTahun()][$result->getBulan()]['nominator'] = $result->getNominator();
+                        $output[$keyIndex][$result->getTahun()][$result->getBulan()]['denominator'] = $result->getDeNominator();
+                        $output[$keyIndex][$result->getTahun()][$result->getBulan()]['value'] = $result->getValue();
+                    }
                 }
             }
         }

@@ -15,7 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Route("/api/indikator")
+ * @Route("/indikator")
  *
  * Class IndikatorApiController
  * @package AppBundle\Controller\Api

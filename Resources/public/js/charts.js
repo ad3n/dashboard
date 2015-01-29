@@ -1,6 +1,9 @@
 var Chart = {};
 
 Chart.scope = '';
+Chart.perPage = 8;
+Chart.page = 0;
+Chart.indikator = [];
 
 Chart.BulanIndonesia = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
 
@@ -17,6 +20,9 @@ Chart.buildScalarChart = function (data, selector, title, subtitle, xAxis, type,
         },
         xAxis: {
             categories: xAxis
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y} %</b>'
         },
         plotOptions: {
             series: {
@@ -140,14 +146,14 @@ Chart.buildPieChart = function (data, selector, title, handler) {
             text: title
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.y}</b>'
+            pointFormat: '{series.name}: <b>{point.y} %</b>'
         },
         plotOptions: {
             pie: {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: true,
+                    enabled: false,
                     format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                     style: {
                         color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
@@ -282,15 +288,14 @@ Chart.createPieChart = function (data, seletor, title, handler) {
         type: 'pie',
         name: 'Total',
         data: output
-    }, seletor, title + temp[0]['name'], handler);
+    }, seletor, title + ' TAHUN ' + temp[0]['name'], handler);
 };
 
-Chart.processDataPerTahun = function (data, type) {
+Chart.processDataPerTahun = function (data) {
     var output = [];
     output['tahun'] = [];
     output['data'] = [];
     output['data']['name'] = 'Total';
-    output['data']['tye'] = type;
     output['data']['data'] = [];
 
     jQuery.each(data['data'], function (key, value) {
@@ -363,6 +368,147 @@ Chart.requestSingleChart = function (callback, indikator, scope, kode, tahun, bu
     });
 };
 
+Chart.requestGroupChart = function (callback, indikator, scope, kode, tahun, bulan) {
+    if ("undefined" === typeof scope) {
+        scope = '0';
+    }
+
+    if ("undefined" === typeof kode) {
+        kode = '0';
+    }
+
+    if ("undefined" === typeof tahun) {
+        tahun = '0';
+    }
+
+    if ("undefined" === typeof bulan) {
+        bulan = '0';
+    }
+
+    jQuery.ajax({
+        url: '/api/chart/group/get/' + indikator + '/' + scope + '/' + kode + '/' + tahun + '/' + bulan,
+        type:'GET',
+        dataType: 'json',
+        beforeSend: function( xhr ) {
+            Chart.modalHelper.pleaseWait();
+        }
+    }).done (function (response) {
+        if ('function' === typeof callback) {
+            Chart.modalHelper.done();
+            callback(response);
+        }
+    });
+};
+
+Chart.buildIndikatorList = function (indikators, limit, start) {
+    var html = '';
+    var length = indikators.length;
+
+    if (0 > start) {
+        start = 0;
+    }
+
+    for (var i = start; i < (limit + start); i++) {
+        if (length > i) {
+            html = html + '<button type="button" data="' + indikators[i].code + '" class="indikatorList btn btn-primary btn-lg btn-block">' + indikators[i].name + '</button>';
+        }
+    }
+
+    var paging = '';
+    if (0 === start) {
+        paging = paging + '<button type="button" class="btn btn-lg btn-primary pull-left sebelum" disabled="disabled">Sebelumnya</button>';
+    } else {
+        paging = paging + '<button type="button" class="btn btn-lg btn-primary pull-left sebelum">Sebelumnya</button>';
+    }
+
+    if (length < (limit + start)) {
+        paging = paging + '<button type="button" class="btn btn-lg btn-primary pull-right setelah" disabled="disabled">Selanjutnya</button>';
+    } else {
+        paging = paging + '<button type="button" class="btn btn-lg btn-primary pull-right setelah">Selanjutnya</button>';
+    }
+
+    jQuery('#block6').html(html);
+    jQuery('#paging').html(paging);
+    Chart.indikatorListClickHandler(indikators);
+};
+
+Chart.indikatorListClickHandler = function (indikators) {
+    jQuery('.indikatorList').on('click', function () {
+        var indikator = jQuery(this).attr('data');
+        Chart.createMainChart(indikator, Chart.page);
+    });
+
+    jQuery('.sebelum').on('click', function () {
+        Chart.page = Chart.page - Chart.perPage;
+
+        Chart.buildIndikatorList(indikators, Chart.perPage, Chart.page);
+    });
+
+    jQuery('.setelah').on('click', function () {
+        Chart.page = Chart.page + Chart.perPage;
+
+        Chart.buildIndikatorList(indikators, Chart.perPage, Chart.page);
+    });
+};
+
+Chart.createMainChart = function (indikator, start) {
+    Chart.requestSingleChart(function (data) {
+        Chart.createColumnChart({
+            click: function (e) {
+                alert('Under Constructions.');
+            }
+        }, data, '#block5', data['indikator']['name']);
+
+        Chart.createGlobalIndikatorChart(indikator);
+    }, indikator, 'nasional');
+};
+
+Chart.createGlobalIndikatorChart = function (indikator) {
+    Chart.requestGroupChart(function (data) {
+        var chart = Chart.processDataGlobal(data);
+
+        Chart.buildScalarChart([chart['data']], '#block6', data['indikator']['name'], null, chart['indikator'], 'bar', {
+            click: function (e) {
+                Chart.requestSingleChart(function (data) {
+                    Chart.createColumnChart({
+                        click: function (e) {
+                            alert('Under Constructions.');
+                        }
+                    }, data, '#block5', data['indikator']['name']);
+                }, this.category, 'nasional');
+            }
+        });
+
+    }, indikator, 'nasional');
+};
+
+Chart.processDataGlobal = function (data) {
+    var output = [];
+    output['indikator'] = [];
+    output['data'] = [];
+    output['data']['name'] = 'Data';
+    output['data']['data'] = [];
+    var total = 0;
+
+    jQuery.each(data['indikator']['child'], function (key, value) {
+        output['indikator'].push(value.code);
+    });
+
+    jQuery.each(data['data'], function (key, value) {
+        var data = 0;
+        jQuery.each(value, function (k, v) {
+            total = Object.keys(v).length;
+            jQuery.each(v, function (y, z) {
+                data = data + parseInt(z['value']);
+            });
+        });
+
+        output['data']['data'].push(Math.round(data / total));
+    });
+
+    return output;
+};
+
 Chart.modalHelper = Chart.modalHelper || (function () {
     var pleaseWaitDiv = jQuery('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="pleaseWaitDialog"><div class="modal-header"><h1 style="color:#eee;">Processing...</h1></div><div class="modal-body"><div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div></div></div></div>');
     return {
@@ -371,7 +517,6 @@ Chart.modalHelper = Chart.modalHelper || (function () {
         },
         done: function () {
             pleaseWaitDiv.modal('hide');
-        },
-
+        }
     };
 })();

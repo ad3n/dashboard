@@ -2,25 +2,22 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-3">
             <div class="chart-wrapper">
                 <div id="block1" class="chart-stage"></div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-3">
             <div class="chart-wrapper">
                 <div id="block2" class="chart-stage"></div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-3">
             <div class="chart-wrapper">
                 <div id="block3" class="chart-stage"></div>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-12">
+        <div class="col-sm-6 col-md-3">
             <div class="chart-wrapper">
                 <div id="block4" class="chart-stage"></div>
             </div>
@@ -28,19 +25,42 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-8">
             <div class="chart-wrapper">
                 <div id="block5" class="chart-stage"></div>
             </div>
         </div>
         <div class="col-sm-6 col-md-4">
             <div class="chart-wrapper">
-                <div id="block6" class="chart-stage"></div>
+                <div class="chart-stage">
+                    <div id="block6"></div>
+                    <div class="row">
+                        <div id="paging" class="padding-7"></div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-4">
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-3">
             <div class="chart-wrapper">
                 <div id="block7" class="chart-stage"></div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="chart-wrapper">
+                <div id="block8" class="chart-stage"></div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="chart-wrapper">
+                <div id="block9" class="chart-stage"></div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="chart-wrapper">
+                <div id="block10" class="chart-stage"></div>
             </div>
         </div>
     </div>
@@ -50,7 +70,7 @@ jQuery(document).ready(function () {
     Chart.requestSingleChart(function (data) {
         Chart.createGaugeChart(data, '#block1', data['indikator']['name'], {
             click: function (e) {
-                Chart.modalHelper.pleaseWait();
+                alert('Under Constructions.');
             }
         });
     }, 'PS01', 'nasional');
@@ -61,7 +81,7 @@ jQuery(document).ready(function () {
                 alert('Under Constructions.');
             }
         });
-    }, 'PS02', 'nasional');
+    }, 'PS02', 'nasional', 0, '01_2015', '12_2015');
 
     Chart.requestSingleChart(function (data) {
         Chart.createGaugeChart(data, '#block3', data['indikator']['name'], {
@@ -72,28 +92,14 @@ jQuery(document).ready(function () {
     }, 'PS03', 'nasional');
 
     Chart.requestSingleChart(function (data) {
-        Chart.createColumnChart({
-            click: function (e) {
-                alert('Under Constructions.');
-            }
-        }, data, '#block4', data['indikator']['name']);
-    }, 'PS04', 'nasional');
-
-    Chart.requestSingleChart(function (data) {
-        Chart.createPieChart(data, '#block5', data['indikator']['name'], {
+        Chart.createGaugeChart(data, '#block4', data['indikator']['name'], {
             click: function (e) {
                 alert('Under Constructions.');
             }
         });
     }, 'PS05', 'nasional');
 
-    Chart.requestSingleChart(function (data) {
-        Chart.createPieChart(data, '#block6', data['indikator']['name'], {
-            click: function (e) {
-                alert('Under Constructions.');
-            }
-        });
-    }, 'PS06', 'nasional');
+    Chart.createMainChart('PS07', 0);
 
     Chart.requestSingleChart(function (data) {
         Chart.createPieChart(data, '#block7', data['indikator']['name'], {
@@ -101,7 +107,31 @@ jQuery(document).ready(function () {
                 alert('Under Constructions.');
             }
         });
-    }, 'PS07', 'nasional');
+    }, 'PS01', 'nasional');
+
+    Chart.requestSingleChart(function (data) {
+        Chart.createPieChart(data, '#block8', data['indikator']['name'], {
+            click: function (e) {
+                alert('Under Constructions.');
+            }
+        });
+    }, 'PS02', 'nasional');
+
+    Chart.requestSingleChart(function (data) {
+        Chart.createPieChart(data, '#block9', data['indikator']['name'], {
+            click: function (e) {
+                alert('Under Constructions.');
+            }
+        });
+    }, 'PS03', 'nasional');
+
+    Chart.requestSingleChart(function (data) {
+        Chart.createPieChart(data, '#block10', data['indikator']['name'], {
+            click: function (e) {
+                alert('Under Constructions.');
+            }
+        });
+    }, 'PS05', 'nasional');
 });
 </script>
 {% endblock %}
